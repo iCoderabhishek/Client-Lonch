@@ -19,30 +19,30 @@ export function Features() {
           <div className="flex flex-col gap-4">
             <h3 className="flex items-center gap-3 text-white font-heading tracking-wide text-sm md:text-base">
               <DatabaseIcon className="w-5 h-5 text-gray-400" />
-              Efficiency At The Edge
+              Isolated Containerized Builds
             </h3>
             <p className="text-gray-500 font-sans text-xs md:text-sm leading-relaxed">
-              With Edge Cloud, Your Data Doesn't Travel Far. Our Edge Computing Approach Processes Data Closer To Its Source, Reducing Latency, And Saving Bandwidth.
+              We execute every build step in secure, isolated Docker containers on AWS CodeBuild, guaranteeing reliable builds without resource contention or crashing the host.
             </p>
           </div>
 
           <div className="flex flex-col gap-4">
             <h3 className="flex items-center gap-3 text-white font-heading tracking-wide text-sm md:text-base">
               <Shield01Icon className="w-5 h-5 text-gray-400" />
-              Unmatched Security
+              Live Log Streaming
             </h3>
             <p className="text-gray-500 font-sans text-xs md:text-sm leading-relaxed">
-              Security Is Not An Afterthought; It's Built Into The Fabric Of Our Platform. From Encrypted Storage To Secure Transmissions, Your Data Is Protected Every Step Of The Way.
+              Never guess what's happening. Build logs are broadcasted in real-time using Redis Pub/Sub and SSE. Application logs are continuously streamed straight from CloudWatch.
             </p>
           </div>
 
           <div className="flex flex-col gap-4">
             <h3 className="flex items-center gap-3 text-white font-heading tracking-wide text-sm md:text-base">
               <ChartLineData01Icon className="w-5 h-5 text-gray-400" />
-              Scalability For Tomorrow
+              Serverless Auto-Scaling
             </h3>
             <p className="text-gray-500 font-sans text-xs md:text-sm leading-relaxed">
-              As Your Data Grows, So Does Our Capacity. Our Scalable Solutions Ensure That Your Growth Is Only Limited By Your Imagination, Not By Your Infrastructure.
+              Powered by AWS ECS and Fargate. Your backend apps automatically scale out during massive traffic spikes and scale down gracefully to save costs when idle.
             </p>
           </div>
         </div>
@@ -50,32 +50,32 @@ export function Features() {
         {/* Main Features Block */}
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-6xl font-heading font-bold text-white tracking-widest uppercase">
-            FEATURES
+            CAPABILITIES
           </h2>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3">
           {/* Feature 1 */}
-          <div className="border-l border-r md:border-r-0 border-white/10 p-8 hover:bg-white/5 transition-colors cursor-default">
-            <h4 className="text-white font-heading tracking-wider mb-4 text-lg">Edge Cloud Buckets</h4>
+          <div className="border-t border-b border-l border-r md:border-r-0 md:border-t-0 md:border-b-0 border-white/10 p-8 hover:bg-white/5 transition-colors cursor-default">
+            <h4 className="text-white font-heading tracking-wider mb-4 text-lg">Static Deployments</h4>
             <p className="text-gray-500 font-sans text-sm">
-              Secure and scalable data storage that grows with your needs.
+              Deploy static assets to AWS S3 instantly with automated Caddy reverse proxy routing for wildcard domains.
             </p>
           </div>
 
           {/* Feature 2 */}
-          <div className="border-l border-r md:border-r-0 border-white/10 p-8 hover:bg-white/5 transition-colors cursor-default">
-            <h4 className="text-white font-heading tracking-wider mb-4 text-lg">Cloud Functions</h4>
+          <div className="border-b border-l border-r md:border-r-0 md:border-t-0 md:border-b-0 border-white/10 p-8 hover:bg-white/5 transition-colors cursor-default">
+            <h4 className="text-white font-heading tracking-wider mb-4 text-lg">Backend Services</h4>
             <p className="text-gray-500 font-sans text-sm">
-              Write, deploy, and execute code effortlessly at the edge.
+              Deploy long-lived Node.js, Python, or Go apps directly to AWS ECR and ECS with rolling deployments.
             </p>
           </div>
 
           {/* Feature 3 */}
-          <div className="border-l border-r border-white/10 p-8 hover:bg-white/5 transition-colors cursor-default">
-            <h4 className="text-white font-heading tracking-wider mb-4 text-lg">Edge Containers</h4>
+          <div className="border-b border-l border-r md:border-t-0 md:border-b-0 border-white/10 p-8 hover:bg-white/5 transition-colors cursor-default">
+            <h4 className="text-white font-heading tracking-wider mb-4 text-lg">Automated Git Sync</h4>
             <p className="text-gray-500 font-sans text-sm">
-              Deploy applications seamlessly across diverse environments.
+              Push your code and we handle the rest. Automatic repository cloning and Dockerfile generation included.
             </p>
           </div>
         </div>

@@ -19,9 +19,10 @@ export function Footer() {
           <span className="font-heading font-bold text-lg tracking-wider text-white">LONCH</span>
         </div>
 
-        <div className="flex items-center gap-8">
-          <Link href="#" className="text-xs font-sans text-gray-500 hover:text-white transition-colors">Privacy Policy</Link>
-          <Link href="#" className="text-xs font-sans text-gray-500 hover:text-white transition-colors">Terms of Service</Link>
+        <div className="flex flex-col md:flex-row items-center gap-6 md:gap-8">
+          <a href="mailto:support@lonch.cloud" className="text-xs font-sans text-gray-400 hover:text-white transition-colors">support@lonch.cloud</a>
+          <Link href="/privacy" className="text-xs font-sans text-gray-500 hover:text-white transition-colors">Privacy Policy</Link>
+          <Link href="/terms" className="text-xs font-sans text-gray-500 hover:text-white transition-colors">Terms of Service</Link>
           <span className="text-xs font-sans text-gray-600">© 2026 Lonch Inc.</span>
         </div>
       </div>
