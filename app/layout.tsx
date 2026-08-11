@@ -1,8 +1,12 @@
 import type { Metadata } from "next";
-import { Orbitron, Lato } from "next/font/google";
+import { Orbitron, Lato, Geist } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/shared/theme-provider";
 import { Providers } from "@/lib/query-provider";
+import { cn } from "@/lib/utils";
+import { Toaster } from "sonner";
+
+const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
 const orbitron = Orbitron({
   variable: "--font-orbitron",
@@ -29,12 +33,13 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${orbitron.variable} ${lato.variable} h-full antialiased`}
+      className={cn("h-full", "antialiased", orbitron.variable, lato.variable, "font-sans", geist.variable)}
     >
       <body className="min-h-full flex flex-col font-sans bg-background text-foreground transition-colors duration-300">
         <Providers>
           <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false} disableTransitionOnChange>
             {children}
+            <Toaster theme="dark" richColors position="bottom-right" />
           </ThemeProvider>
         </Providers>
       </body>

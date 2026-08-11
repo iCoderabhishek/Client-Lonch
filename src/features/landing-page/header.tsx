@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { Menu01Icon, Cancel01Icon } from "hugeicons-react";
+import { API_BASE_URL } from "@/lib/client";
 
 const LonchLogo = ({ className }: { className?: string }) => (
   <svg className={className} width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -34,9 +35,9 @@ export function Header() {
         </nav>
 
         {/* Desktop CTA */}
-        <Link href="/dashboard" className="hidden md:block px-6 py-2.5 bg-white/5 hover:bg-cyan-500 hover:border-cyan-500 hover:shadow-[0_0_15px_rgba(34,211,238,0.5)] border border-white/10 text-white text-sm font-sans rounded transition-all duration-300">
+        <a href={`${API_BASE_URL}/auth/github`} className="hidden md:block px-6 py-2.5 bg-white/5 hover:bg-cyan-500 hover:border-cyan-500 hover:shadow-[0_0_15px_rgba(34,211,238,0.5)] border border-white/10 text-white text-sm font-sans rounded transition-all duration-300">
           Start Building
-        </Link>
+        </a>
 
         {/* Mobile Menu Button */}
         <button 
@@ -53,9 +54,9 @@ export function Header() {
           <Link href="/docs" onClick={() => setIsMobileMenuOpen(false)} className="text-xl font-heading text-white hover:text-gray-300 transition-colors">Docs</Link>
           <Link href="/about" onClick={() => setIsMobileMenuOpen(false)} className="text-xl font-heading text-white hover:text-gray-300 transition-colors">About</Link>
           <Link href="/contact" onClick={() => setIsMobileMenuOpen(false)} className="text-xl font-heading text-white hover:text-gray-300 transition-colors">Contact</Link>
-          <Link href="/dashboard" onClick={() => setIsMobileMenuOpen(false)} className="px-8 py-4 mt-4 bg-white/10 border border-white/20 text-white font-sans rounded transition-colors">
+          <a href={`${API_BASE_URL}/auth/github`} onClick={() => setIsMobileMenuOpen(false)} className="px-8 py-4 mt-4 bg-white/10 border border-white/20 text-white font-sans rounded transition-colors">
             Start Building
-          </Link>
+          </a>
         </div>
       </div>
     </header>
