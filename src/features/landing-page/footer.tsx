@@ -1,6 +1,13 @@
 import React from "react";
 import Link from "next/link";
-import { Layers01Icon } from "hugeicons-react";
+
+const LonchLogo = ({ className }: { className?: string }) => (
+  <svg className={className} width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M16 2L26 14H6L16 2Z" fill="currentColor"/>
+    <path d="M6 20L16 26L26 20" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
+    <path d="M10 26L16 30L22 26" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
+  </svg>
+);
 
 export function Footer() {
   return (
@@ -10,8 +17,8 @@ export function Footer() {
           
           {/* Logo Column */}
           <div className="col-span-1">
-            <Link href="/" className="flex items-center gap-3 mb-6">
-              <Layers01Icon className="w-8 h-8 text-white" />
+            <Link href="/" className="flex items-center gap-3 mb-6 group">
+              <LonchLogo className="w-8 h-8 text-cyan-500 group-hover:text-cyan-400 transition-colors" />
               <span className="font-heading font-bold text-xl tracking-wider text-white">LONCH</span>
             </Link>
             <p className="text-gray-500 font-sans text-sm leading-relaxed max-w-xs">
