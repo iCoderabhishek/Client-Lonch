@@ -1,79 +1,63 @@
 "use client";
 
+import React, { useState } from "react";
 import Link from "next/link";
-import { Menu01Icon } from "hugeicons-react";
-import { useState } from "react";
-import { SIGNUP_URL } from "@/lib/env";
+import { Menu01Icon, Cancel01Icon } from "hugeicons-react";
+
+const LonchLogo = ({ className }: { className?: string }) => (
+  <svg className={className} width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M16 2L26 14H6L16 2Z" fill="currentColor"/>
+    <path d="M6 20L16 26L26 20" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
+    <path d="M10 26L16 30L22 26" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
+  </svg>
+);
 
 export function Header() {
-    const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-    return (
-        <header className="fixed top-0 inset-x-0 z-50 bg-background/80 backdrop-blur-md border-b border-black/5">
-            <nav className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8" aria-label="Global">
-                <div className="flex lg:flex-1">
-                    <Link href="/" className="-m-1.5 p-1.5 flex items-center gap-2">
-                        <span className="sr-only">Lonch</span>
-                        {/* Custom SVG Logo */}
-                        <img src="/assets/logo.svg" alt="Lonch Logo" width={32} height={32} />
-                        <span className="font-serif text-2xl font-bold tracking-tight">Lonch</span>
-                    </Link>
-                </div>
-                <div className="flex lg:hidden">
-                    <button
-                        type="button"
-                        className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-foreground"
-                        onClick={() => setMobileMenuOpen(true)}
-                    >
-                        <span className="sr-only">Open main menu</span>
-                        <Menu01Icon className="h-6 w-6" aria-hidden="true" />
-                    </button>
-                </div>
-                <div className="hidden lg:flex lg:gap-x-12">
-                    <Link href="#features" className="text-sm font-medium leading-6 text-foreground hover:text-foreground/70 transition-colors">
-                        Features
-                    </Link>
-                    <Link href="#pricing" className="text-sm font-medium leading-6 text-foreground hover:text-foreground/70 transition-colors">
-                        Pricing
-                    </Link>
-                    <Link href="#about" className="text-sm font-medium leading-6 text-foreground hover:text-foreground/70 transition-colors">
-                        About
-                    </Link>
-                </div>
-                <div className="hidden lg:flex lg:flex-1 lg:justify-end lg:gap-x-4 items-center">
-                    <Link href={SIGNUP_URL} className="text-sm font-medium leading-6 text-foreground hover:text-foreground/70 transition-colors">
-                        Log in
-                    </Link>
-                    <Link
-                        href={SIGNUP_URL}
-                        className="rounded-full bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow-sm hover:bg-primary/90 transition-all active:scale-95"
-                    >
-                        Get Started
-                    </Link>
-                </div>
-            </nav>
-            {/* Mobile Menu Simplified for demo */}
-            {mobileMenuOpen && (
-                <div className="lg:hidden absolute top-0 left-0 w-full bg-background border-b border-black/5 p-6 z-50">
-                    <div className="flex items-center justify-between">
-                        <Link href="/" className="font-serif text-2xl font-bold">Lonch</Link>
-                        <button onClick={() => setMobileMenuOpen(false)}>Close</button>
-                    </div>
-                    <div className="mt-6 flow-root">
-                        <div className="-my-6 divide-y divide-gray-500/10">
-                            <div className="space-y-2 py-6 flex flex-col">
-                                <Link href="#features" className="block px-3 py-2 text-base font-medium text-foreground">Features</Link>
-                                <Link href="#pricing" className="block px-3 py-2 text-base font-medium text-foreground">Pricing</Link>
-                                <Link href="#about" className="block px-3 py-2 text-base font-medium text-foreground">About</Link>
-                            </div>
-                            <div className="py-6 flex flex-col gap-2">
-                                <Link href={SIGNUP_URL} className="block px-3 py-2.5 text-base font-medium text-foreground">Log in</Link>
-                                <Link href={SIGNUP_URL} className="block px-3 py-2.5 text-base font-medium bg-primary text-primary-foreground rounded-full text-center">Get Started</Link>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            )}
-        </header>
-    );
+  return (
+    <header className="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-md border-b border-white/5">
+      <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+        {/* Logo */}
+        <Link href="/" className="flex items-center gap-3 group z-50">
+          <LonchLogo className="w-8 h-8 text-cyan-500 group-hover:text-cyan-400 transition-colors" />
+          <span className="font-heading font-bold text-xl tracking-wider text-white">LONCH</span>
+        </Link>
+
+        {/* Desktop Navigation */}
+        <nav className="hidden md:flex items-center gap-8">
+          <Link href="/features" className="text-sm font-sans text-gray-400 hover:text-white transition-colors">Features</Link>
+          <Link href="/pricing" className="text-sm font-sans text-gray-400 hover:text-white transition-colors">Pricing</Link>
+          <Link href="/docs" className="text-sm font-sans text-gray-400 hover:text-white transition-colors">Docs</Link>
+          <Link href="/about" className="text-sm font-sans text-gray-400 hover:text-white transition-colors">About</Link>
+          <Link href="/contact" className="text-sm font-sans text-gray-400 hover:text-white transition-colors">Contact</Link>
+        </nav>
+
+        {/* Desktop CTA */}
+        <Link href="/dashboard" className="hidden md:block px-6 py-2.5 bg-white/5 hover:bg-cyan-500 hover:border-cyan-500 hover:shadow-[0_0_15px_rgba(34,211,238,0.5)] border border-white/10 text-white text-sm font-sans rounded transition-all duration-300">
+          Start Building
+        </Link>
+
+        {/* Mobile Menu Button */}
+        <button 
+          className="md:hidden p-2 text-white z-50"
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+        >
+          {isMobileMenuOpen ? <Cancel01Icon className="w-6 h-6" /> : <Menu01Icon className="w-6 h-6" />}
+        </button>
+
+        {/* Mobile Navigation Drawer */}
+        <div className={`fixed inset-0 bg-black/95 backdrop-blur-xl z-40 transition-transform duration-300 ease-in-out md:hidden flex flex-col items-center justify-center gap-8 ${isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+          <Link href="/features" onClick={() => setIsMobileMenuOpen(false)} className="text-xl font-heading text-white hover:text-gray-300 transition-colors">Features</Link>
+          <Link href="/pricing" onClick={() => setIsMobileMenuOpen(false)} className="text-xl font-heading text-white hover:text-gray-300 transition-colors">Pricing</Link>
+          <Link href="/docs" onClick={() => setIsMobileMenuOpen(false)} className="text-xl font-heading text-white hover:text-gray-300 transition-colors">Docs</Link>
+          <Link href="/about" onClick={() => setIsMobileMenuOpen(false)} className="text-xl font-heading text-white hover:text-gray-300 transition-colors">About</Link>
+          <Link href="/contact" onClick={() => setIsMobileMenuOpen(false)} className="text-xl font-heading text-white hover:text-gray-300 transition-colors">Contact</Link>
+          <Link href="/dashboard" onClick={() => setIsMobileMenuOpen(false)} className="px-8 py-4 mt-4 bg-white/10 border border-white/20 text-white font-sans rounded transition-colors">
+            Start Building
+          </Link>
+        </div>
+      </div>
+    </header>
+  );
 }

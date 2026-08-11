@@ -1,77 +1,109 @@
-"use client";
-
-import { motion } from "framer-motion";
+import React from "react";
+import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight01Icon, PlayIcon } from "hugeicons-react";
-import { DEMO_URL, SIGNUP_URL } from "@/lib/env";
+import { DatabaseIcon, Shield01Icon, ChartLineData01Icon } from "hugeicons-react";
 
 export function Hero() {
   return (
-    <div className="relative isolate pt-32 pb-20 sm:pt-40 lg:pt-48 lg:pb-32 overflow-hidden">
-      {/* Minimal background element, no sloppy gradients */}
-      <div className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80" aria-hidden="true">
-        <div className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-black/5 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]" />
+    <section className="relative min-h-[95vh] pt-20 flex flex-col items-center justify-center bg-black overflow-hidden border-b border-white/5 pb-20">
+      {/* Subtle Vertical Grid Lines */}
+      <div className="absolute inset-0 pointer-events-none flex justify-between max-w-7xl mx-auto px-6 opacity-20 z-0">
+        <div className="w-[1px] h-full bg-white/10" />
+        <div className="w-[1px] h-full bg-white/10" />
+        <div className="w-[1px] h-full bg-white/10" />
+        <div className="w-[1px] h-full bg-white/10" />
       </div>
 
-      <div className="mx-auto max-w-7xl px-6 lg:px-8 text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          className="mx-auto max-w-4xl"
-        >
-          <h1 className="font-serif text-5xl tracking-tight text-foreground sm:text-7xl lg:text-8xl text-balance leading-[1.1]">
-            Share media with your team seamlessly.
-          </h1>
-          <p className="mt-8 text-lg leading-8 text-muted-foreground max-w-2xl mx-auto text-balance">
-            Like Google Drive or Dropbox, but crafted exclusively for high-velocity workspaces. Organize, share, and collaborate without the friction.
-          </p>
-          <div className="mt-10 flex items-center justify-center gap-x-6">
+      <div className="max-w-7xl mx-auto px-6 w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center relative mb-10">
+
+        {/* Left Content */}
+        <div className="flex flex-col items-start pt-10 relative z-40">
+
+          <div className="pl-6 border-l-2 border-white/20 mb-10 py-4 relative z-10">
+            <p className="text-gray-400 font-sans text-lg mb-2">Welcome to</p>
+            <h1 className="text-5xl sm:text-7xl lg:text-[5.5rem] font-heading font-bold text-cyan-500 tracking-widest leading-[1.1] mb-6 uppercase">
+              LONCH<br />CLOUD
+            </h1>
+            <p className="text-white font-sans text-lg md:text-xl tracking-wide font-light">
+              The Next-Generation Cloud Deployment Platform
+            </p>
+          </div>
+
+          <div className="pl-6 border-l-2 border-white/20 py-2 max-w-md relative z-10">
+            <p className="text-gray-400 font-sans text-base md:text-lg leading-relaxed">
+              Deploy any backend, frontend, or static site effortlessly. Harness the raw power and infinite scalability of AWS infrastructure without the operational overhead.
+            </p>
+          </div>
+
+          <div className="mt-12 pl-6 mb-24 lg:mb-32 relative z-40">
             <Link
-              href={SIGNUP_URL}
-              className="rounded-full bg-primary px-6 py-3.5 text-sm font-semibold text-primary-foreground shadow-sm hover:bg-primary/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary transition-all active:scale-95 flex items-center gap-2 group"
+              href="/dashboard"
+              className="group relative inline-block px-12 py-4 bg-white text-black font-sans font-bold tracking-widest text-base uppercase transition-all duration-300 hover:scale-105 hover:shadow-[0_0_40px_rgba(34,211,238,0.6)] hover:text-white rounded-sm overflow-hidden"
             >
-              Start for free
-              <ArrowRight01Icon className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </Link>
-            <Link
-              href={DEMO_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-sm font-semibold leading-6 text-foreground hover:text-foreground/70 transition-colors flex items-center gap-2"
-            >
-              <PlayIcon className="w-5 h-5" />
-              Watch demo
+              <span className="relative z-10 transition-colors duration-300">Start Building</span>
+              <div className="absolute inset-0 bg-cyan-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
             </Link>
           </div>
-        </motion.div>
+        </div>
 
-        {/* Abstract UI representation instead of a basic image */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, ease: "easeOut", delay: 0.2 }}
-          className="mt-20 sm:mt-24"
-        >
-          <div className="relative rounded-2xl bg-black/5 p-2 ring-1 ring-inset ring-black/10 lg:rounded-3xl lg:p-4 mx-auto max-w-5xl shadow-2xl">
-            <div className="rounded-xl bg-white ring-1 ring-black/5 overflow-hidden flex flex-col shadow-sm">
-              <div className="h-12 border-b border-black/5 flex items-center px-4 gap-2 bg-gray-50/50 shrink-0">
-                <div className="w-3 h-3 rounded-full bg-red-400" />
-                <div className="w-3 h-3 rounded-full bg-amber-400" />
-                <div className="w-3 h-3 rounded-full bg-green-400" />
-              </div>
-              <div className="flex-1 bg-gray-50/20 relative overflow-hidden">
-                {/* Internal UI Mockup - Dashboard Screenshot */}
-                <img
-                  src="/assets/dashboard_screenshot.png"
-                  alt="Lonch Dashboard"
-                  className="w-full h-auto object-contain object-top block pointer-events-none"
-                />
-              </div>
+        {/* Right Graphic */}
+        <div className="relative flex justify-center items-center h-[500px] lg:h-[600px] mt-12 lg:mt-0">
+          {/* Subtle glow behind image */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] md:w-[400px] h-[300px] md:h-[400px] bg-white/5 rounded-full blur-[100px]" />
+
+          <Image
+            src="/assets/abstract-person.png"
+            alt="Futuristic Abstract Person"
+            width={800}
+            height={800}
+            className="relative z-10 object-contain w-full max-w-[400px] lg:max-w-[550px] filter drop-shadow-2xl"
+            priority
+          />
+        </div>
+      </div>
+
+      {/* Overlapping Glassmorphic Card (The 3 Columns) */}
+      <div className="max-w-6xl mx-auto px-6 w-full relative z-30 lg:-mt-24">
+        <div className="bg-black/60 backdrop-blur-xl border border-white/10 hover:border-cyan-500/30 rounded-2xl p-8 md:p-12 shadow-[0_0_50px_rgba(0,0,0,0.5)] hover:shadow-[0_0_60px_rgba(34,211,238,0.15)] transition-all duration-500 relative overflow-hidden">
+          
+          {/* Subtle top glare */}
+          <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-cyan-500/50 to-transparent opacity-50" />
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 relative z-10">
+            
+            <div className="flex flex-col gap-4 group p-4 -m-4 rounded-xl hover:bg-white/5 transition-all duration-300">
+              <h3 className="flex items-center gap-3 text-white font-heading tracking-wide text-sm md:text-base group-hover:text-cyan-400 transition-colors">
+                <DatabaseIcon className="w-5 h-5 text-gray-400 group-hover:text-cyan-500 transition-colors" />
+                Efficiency At The Edge
+              </h3>
+              <p className="text-gray-500 font-sans text-xs md:text-sm leading-relaxed">
+                With Edge Cloud, Your Data Doesn't Travel Far. Our Edge Computing Approach Processes Data Closer To Its Source, Reducing Latency, And Saving Bandwidth.
+              </p>
             </div>
+
+            <div className="flex flex-col gap-4 group p-4 -m-4 rounded-xl hover:bg-white/5 transition-all duration-300">
+              <h3 className="flex items-center gap-3 text-white font-heading tracking-wide text-sm md:text-base group-hover:text-cyan-400 transition-colors">
+                <Shield01Icon className="w-5 h-5 text-gray-400 group-hover:text-cyan-500 transition-colors" />
+                Unmatched Security
+              </h3>
+              <p className="text-gray-500 font-sans text-xs md:text-sm leading-relaxed">
+                Security Is Not An Afterthought; It's Built Into The Fabric Of Our Platform. From Encrypted Storage To Secure Transmissions, Your Data Is Protected Every Step Of The Way.
+              </p>
+            </div>
+
+            <div className="flex flex-col gap-4 group p-4 -m-4 rounded-xl hover:bg-white/5 transition-all duration-300">
+              <h3 className="flex items-center gap-3 text-white font-heading tracking-wide text-sm md:text-base group-hover:text-cyan-400 transition-colors">
+                <ChartLineData01Icon className="w-5 h-5 text-gray-400 group-hover:text-cyan-500 transition-colors" />
+                Scalability For Tomorrow
+              </h3>
+              <p className="text-gray-500 font-sans text-xs md:text-sm leading-relaxed">
+                As Your Data Grows, So Does Our Capacity. Our Scalable Solutions Ensure That Your Growth Is Only Limited By Your Imagination, Not By Your Infrastructure.
+              </p>
+            </div>
+
           </div>
-        </motion.div>
+        </div>
       </div>
-    </div>
+    </section>
   );
 }
