@@ -18,14 +18,15 @@ export function Header() {
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center gap-8">
-          <Link href="#features" className="text-sm font-sans text-gray-400 hover:text-white transition-colors">Features</Link>
-          <Link href="#about" className="text-sm font-sans text-gray-400 hover:text-white transition-colors">About</Link>
-          <Link href="#technology" className="text-sm font-sans text-gray-400 hover:text-white transition-colors">Technology</Link>
-          <Link href="#contact" className="text-sm font-sans text-gray-400 hover:text-white transition-colors">Contact</Link>
+          <Link href="/features" className="text-sm font-sans text-gray-400 hover:text-white transition-colors">Features</Link>
+          <Link href="/pricing" className="text-sm font-sans text-gray-400 hover:text-white transition-colors">Pricing</Link>
+          <Link href="/docs" className="text-sm font-sans text-gray-400 hover:text-white transition-colors">Docs</Link>
+          <Link href="/about" className="text-sm font-sans text-gray-400 hover:text-white transition-colors">About</Link>
+          <Link href="/contact" className="text-sm font-sans text-gray-400 hover:text-white transition-colors">Contact</Link>
         </nav>
 
         {/* Desktop CTA */}
-        <Link href="/dashboard" className="hidden md:block px-6 py-2.5 bg-white/5 hover:bg-white/10 border border-white/10 text-white text-sm font-sans rounded transition-colors">
+        <Link href="/dashboard" className="hidden md:block px-6 py-2.5 bg-white/5 hover:bg-cyan-500 hover:border-cyan-500 hover:shadow-[0_0_15px_rgba(34,211,238,0.5)] border border-white/10 text-white text-sm font-sans rounded transition-all duration-300">
           Start Building
         </Link>
 
@@ -39,10 +40,11 @@ export function Header() {
 
         {/* Mobile Navigation Drawer */}
         <div className={`fixed inset-0 bg-black/95 backdrop-blur-xl z-40 transition-transform duration-300 ease-in-out md:hidden flex flex-col items-center justify-center gap-8 ${isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
-          <Link href="#features" onClick={() => setIsMobileMenuOpen(false)} className="text-xl font-heading text-white hover:text-gray-300 transition-colors">Features</Link>
-          <Link href="#about" onClick={() => setIsMobileMenuOpen(false)} className="text-xl font-heading text-white hover:text-gray-300 transition-colors">About</Link>
-          <Link href="#technology" onClick={() => setIsMobileMenuOpen(false)} className="text-xl font-heading text-white hover:text-gray-300 transition-colors">Technology</Link>
-          <Link href="#contact" onClick={() => setIsMobileMenuOpen(false)} className="text-xl font-heading text-white hover:text-gray-300 transition-colors">Contact</Link>
+          <Link href="/features" onClick={() => setIsMobileMenuOpen(false)} className="text-xl font-heading text-white hover:text-gray-300 transition-colors">Features</Link>
+          <Link href="/pricing" onClick={() => setIsMobileMenuOpen(false)} className="text-xl font-heading text-white hover:text-gray-300 transition-colors">Pricing</Link>
+          <Link href="/docs" onClick={() => setIsMobileMenuOpen(false)} className="text-xl font-heading text-white hover:text-gray-300 transition-colors">Docs</Link>
+          <Link href="/about" onClick={() => setIsMobileMenuOpen(false)} className="text-xl font-heading text-white hover:text-gray-300 transition-colors">About</Link>
+          <Link href="/contact" onClick={() => setIsMobileMenuOpen(false)} className="text-xl font-heading text-white hover:text-gray-300 transition-colors">Contact</Link>
           <Link href="/dashboard" onClick={() => setIsMobileMenuOpen(false)} className="px-8 py-4 mt-4 bg-white/10 border border-white/20 text-white font-sans rounded transition-colors">
             Start Building
           </Link>
