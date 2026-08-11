@@ -64,12 +64,16 @@ export function Hero() {
 
       {/* Overlapping Glassmorphic Card (The 3 Columns) */}
       <div className="max-w-6xl mx-auto px-6 w-full relative z-30 lg:-mt-24">
-        <div className="bg-black/60 backdrop-blur-xl border-t border-white/10 rounded-2xl p-8 md:p-12 shadow-[0_0_50px_rgba(0,0,0,0.5)]">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+        <div className="bg-black/60 backdrop-blur-xl border border-white/10 hover:border-cyan-500/30 rounded-2xl p-8 md:p-12 shadow-[0_0_50px_rgba(0,0,0,0.5)] hover:shadow-[0_0_60px_rgba(34,211,238,0.15)] transition-all duration-500 relative overflow-hidden">
+          
+          {/* Subtle top glare */}
+          <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-cyan-500/50 to-transparent opacity-50" />
 
-            <div className="flex flex-col gap-4">
-              <h3 className="flex items-center gap-3 text-white font-heading tracking-wide text-sm md:text-base">
-                <DatabaseIcon className="w-5 h-5 text-gray-400" />
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 relative z-10">
+            
+            <div className="flex flex-col gap-4 group p-4 -m-4 rounded-xl hover:bg-white/5 transition-all duration-300">
+              <h3 className="flex items-center gap-3 text-white font-heading tracking-wide text-sm md:text-base group-hover:text-cyan-400 transition-colors">
+                <DatabaseIcon className="w-5 h-5 text-gray-400 group-hover:text-cyan-500 transition-colors" />
                 Efficiency At The Edge
               </h3>
               <p className="text-gray-500 font-sans text-xs md:text-sm leading-relaxed">
@@ -77,9 +81,9 @@ export function Hero() {
               </p>
             </div>
 
-            <div className="flex flex-col gap-4">
-              <h3 className="flex items-center gap-3 text-white font-heading tracking-wide text-sm md:text-base">
-                <Shield01Icon className="w-5 h-5 text-gray-400" />
+            <div className="flex flex-col gap-4 group p-4 -m-4 rounded-xl hover:bg-white/5 transition-all duration-300">
+              <h3 className="flex items-center gap-3 text-white font-heading tracking-wide text-sm md:text-base group-hover:text-cyan-400 transition-colors">
+                <Shield01Icon className="w-5 h-5 text-gray-400 group-hover:text-cyan-500 transition-colors" />
                 Unmatched Security
               </h3>
               <p className="text-gray-500 font-sans text-xs md:text-sm leading-relaxed">
@@ -87,9 +91,9 @@ export function Hero() {
               </p>
             </div>
 
-            <div className="flex flex-col gap-4">
-              <h3 className="flex items-center gap-3 text-white font-heading tracking-wide text-sm md:text-base">
-                <ChartLineData01Icon className="w-5 h-5 text-gray-400" />
+            <div className="flex flex-col gap-4 group p-4 -m-4 rounded-xl hover:bg-white/5 transition-all duration-300">
+              <h3 className="flex items-center gap-3 text-white font-heading tracking-wide text-sm md:text-base group-hover:text-cyan-400 transition-colors">
+                <ChartLineData01Icon className="w-5 h-5 text-gray-400 group-hover:text-cyan-500 transition-colors" />
                 Scalability For Tomorrow
               </h3>
               <p className="text-gray-500 font-sans text-xs md:text-sm leading-relaxed">
