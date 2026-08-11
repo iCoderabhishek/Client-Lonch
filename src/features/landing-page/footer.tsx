@@ -1,47 +1,28 @@
+import React from "react";
 import Link from "next/link";
-import { GithubIcon, TwitterIcon } from "hugeicons-react";
-import { SIGNUP_URL } from "@/lib/env";
+import { Layers01Icon } from "hugeicons-react";
 
 export function Footer() {
   return (
-    <footer className="bg-white border-t border-black/5">
-      <div className="mx-auto max-w-7xl overflow-hidden px-6 py-20 sm:py-24 lg:px-8">
-        <nav className="-mb-6 columns-2 sm:flex sm:justify-center sm:space-x-12" aria-label="Footer">
-          <div className="pb-6">
-            <Link href="#features" className="text-sm leading-6 text-foreground hover:text-foreground/70 transition-colors font-medium">
-              Features
-            </Link>
-          </div>
-          <div className="pb-6">
-            <Link href="#pricing" className="text-sm leading-6 text-foreground hover:text-foreground/70 transition-colors font-medium">
-              Pricing
-            </Link>
-          </div>
-          <div className="pb-6">
-            <Link href="#about" className="text-sm leading-6 text-foreground hover:text-foreground/70 transition-colors font-medium">
-              About
-            </Link>
-          </div>
-          <div className="pb-6">
-            <Link href={SIGNUP_URL} className="text-sm leading-6 text-foreground hover:text-foreground/70 transition-colors font-medium">
-              Log in
-            </Link>
-          </div>
-        </nav>
-        <div className="mt-10 flex justify-center space-x-10">
-          <Link href="https://github.com/iCoderabhishek/Lonch" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors">
-            <span className="sr-only">GitHub</span>
-            <GithubIcon className="h-6 w-6" aria-hidden="true" />
-          </Link>
-          <Link href="https://x.com/0bhishek" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors">
-            <span className="sr-only">Twitter</span>
-            <TwitterIcon className="h-6 w-6" aria-hidden="true" />
-          </Link>
+    <footer className="bg-black py-16 border-t border-white/5 relative overflow-hidden">
+      {/* Background Grid Lines */}
+      <div className="absolute inset-0 pointer-events-none flex justify-between max-w-7xl mx-auto px-6 opacity-20">
+        <div className="w-[1px] h-full bg-white/10" />
+        <div className="w-[1px] h-full bg-white/10" />
+        <div className="w-[1px] h-full bg-white/10" />
+        <div className="w-[1px] h-full bg-white/10" />
+      </div>
+
+      <div className="max-w-7xl mx-auto px-6 relative z-10 flex flex-col md:flex-row items-center justify-between">
+        <div className="flex items-center gap-3 mb-8 md:mb-0">
+          <Layers01Icon className="w-6 h-6 text-white" />
+          <span className="font-heading font-bold text-lg tracking-wider text-white">LONCH</span>
         </div>
-        <div className="mt-10 flex flex-col items-center gap-2">
-          <p className="text-center text-sm leading-5 text-muted-foreground">
-            &copy; {new Date().getFullYear()} Lonch Inc. All rights reserved.
-          </p>
+
+        <div className="flex items-center gap-8">
+          <Link href="#" className="text-xs font-sans text-gray-500 hover:text-white transition-colors">Privacy Policy</Link>
+          <Link href="#" className="text-xs font-sans text-gray-500 hover:text-white transition-colors">Terms of Service</Link>
+          <span className="text-xs font-sans text-gray-600">© 2026 Lonch Inc.</span>
         </div>
       </div>
     </footer>

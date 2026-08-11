@@ -1,79 +1,32 @@
-"use client";
-
+import React from "react";
 import Link from "next/link";
-import { Menu01Icon } from "hugeicons-react";
-import { useState } from "react";
-import { SIGNUP_URL } from "@/lib/env";
+import { Layers01Icon } from "hugeicons-react";
 
 export function Header() {
-    const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  return (
+    <header className="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-md border-b border-white/5">
+      <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+        {/* Logo */}
+        <Link href="/" className="flex items-center gap-3 group">
+          <Layers01Icon className="w-8 h-8 text-white group-hover:text-gray-300 transition-colors" />
+          <span className="font-heading font-bold text-xl tracking-wider text-white">LONCH</span>
+        </Link>
 
-    return (
-        <header className="fixed top-0 inset-x-0 z-50 bg-background/80 backdrop-blur-md border-b border-black/5">
-            <nav className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8" aria-label="Global">
-                <div className="flex lg:flex-1">
-                    <Link href="/" className="-m-1.5 p-1.5 flex items-center gap-2">
-                        <span className="sr-only">Lonch</span>
-                        {/* Custom SVG Logo */}
-                        <img src="/assets/logo.svg" alt="Lonch Logo" width={32} height={32} />
-                        <span className="font-serif text-2xl font-bold tracking-tight">Lonch</span>
-                    </Link>
-                </div>
-                <div className="flex lg:hidden">
-                    <button
-                        type="button"
-                        className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-foreground"
-                        onClick={() => setMobileMenuOpen(true)}
-                    >
-                        <span className="sr-only">Open main menu</span>
-                        <Menu01Icon className="h-6 w-6" aria-hidden="true" />
-                    </button>
-                </div>
-                <div className="hidden lg:flex lg:gap-x-12">
-                    <Link href="#features" className="text-sm font-medium leading-6 text-foreground hover:text-foreground/70 transition-colors">
-                        Features
-                    </Link>
-                    <Link href="#pricing" className="text-sm font-medium leading-6 text-foreground hover:text-foreground/70 transition-colors">
-                        Pricing
-                    </Link>
-                    <Link href="#about" className="text-sm font-medium leading-6 text-foreground hover:text-foreground/70 transition-colors">
-                        About
-                    </Link>
-                </div>
-                <div className="hidden lg:flex lg:flex-1 lg:justify-end lg:gap-x-4 items-center">
-                    <Link href={SIGNUP_URL} className="text-sm font-medium leading-6 text-foreground hover:text-foreground/70 transition-colors">
-                        Log in
-                    </Link>
-                    <Link
-                        href={SIGNUP_URL}
-                        className="rounded-full bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow-sm hover:bg-primary/90 transition-all active:scale-95"
-                    >
-                        Get Started
-                    </Link>
-                </div>
-            </nav>
-            {/* Mobile Menu Simplified for demo */}
-            {mobileMenuOpen && (
-                <div className="lg:hidden absolute top-0 left-0 w-full bg-background border-b border-black/5 p-6 z-50">
-                    <div className="flex items-center justify-between">
-                        <Link href="/" className="font-serif text-2xl font-bold">Lonch</Link>
-                        <button onClick={() => setMobileMenuOpen(false)}>Close</button>
-                    </div>
-                    <div className="mt-6 flow-root">
-                        <div className="-my-6 divide-y divide-gray-500/10">
-                            <div className="space-y-2 py-6 flex flex-col">
-                                <Link href="#features" className="block px-3 py-2 text-base font-medium text-foreground">Features</Link>
-                                <Link href="#pricing" className="block px-3 py-2 text-base font-medium text-foreground">Pricing</Link>
-                                <Link href="#about" className="block px-3 py-2 text-base font-medium text-foreground">About</Link>
-                            </div>
-                            <div className="py-6 flex flex-col gap-2">
-                                <Link href={SIGNUP_URL} className="block px-3 py-2.5 text-base font-medium text-foreground">Log in</Link>
-                                <Link href={SIGNUP_URL} className="block px-3 py-2.5 text-base font-medium bg-primary text-primary-foreground rounded-full text-center">Get Started</Link>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            )}
-        </header>
-    );
+        {/* Navigation */}
+        <nav className="hidden md:flex items-center gap-8">
+          <Link href="#features" className="text-sm font-sans text-gray-400 hover:text-white transition-colors">Features</Link>
+          <Link href="#about" className="text-sm font-sans text-gray-400 hover:text-white transition-colors">About</Link>
+          <Link href="#use-cases" className="text-sm font-sans text-gray-400 hover:text-white transition-colors">Use Cases</Link>
+          <Link href="#technology" className="text-sm font-sans text-gray-400 hover:text-white transition-colors">Technology</Link>
+          <Link href="#faq" className="text-sm font-sans text-gray-400 hover:text-white transition-colors">FAQ</Link>
+          <Link href="#contact" className="text-sm font-sans text-gray-400 hover:text-white transition-colors">Contact</Link>
+        </nav>
+
+        {/* CTA */}
+        <Link href="/dashboard" className="px-6 py-2.5 bg-white/5 hover:bg-white/10 border border-white/10 text-white text-sm font-sans rounded transition-colors">
+          Start Building
+        </Link>
+      </div>
+    </header>
+  );
 }
