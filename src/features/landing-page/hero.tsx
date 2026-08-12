@@ -2,6 +2,7 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { DatabaseIcon, Shield01Icon, ChartLineData01Icon } from "hugeicons-react";
+import { API_BASE_URL } from "@/lib/client";
 
 export function Hero() {
   return (
@@ -36,13 +37,13 @@ export function Hero() {
           </div>
 
           <div className="mt-12 pl-6 mb-24 lg:mb-32 relative z-40">
-            <Link
-              href="/dashboard"
+            <a
+              href={`${API_BASE_URL}/auth/github`}
               className="group relative inline-block px-12 py-4 bg-white text-black font-sans font-bold tracking-widest text-base uppercase transition-all duration-300 hover:scale-105 hover:shadow-[0_0_40px_rgba(34,211,238,0.6)] hover:text-white rounded-sm overflow-hidden"
             >
               <span className="relative z-10 transition-colors duration-300">Start Building</span>
               <div className="absolute inset-0 bg-cyan-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
-            </Link>
+            </a>
           </div>
         </div>
 
