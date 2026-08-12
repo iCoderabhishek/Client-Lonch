@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 import { Header } from '@/features/landing-page/header';
 import { Footer } from '@/features/landing-page/footer';
 
@@ -30,9 +31,9 @@ export default function PricingPage() {
               <li className="flex items-center text-gray-300 font-sans text-sm"><span className="text-white mr-3">✓</span> Community Support</li>
             </ul>
             
-            <button className="w-full py-3 bg-white/10 hover:bg-white/20 border border-white/20 text-white rounded transition-colors font-sans">
+            <Link href="/dashboard" className="block w-full py-3 bg-white/10 hover:bg-white/20 border border-white/20 text-white rounded transition-colors font-sans text-center">
               Deploy Now
-            </button>
+            </Link>
           </div>
 
           {/* Custom Tier */}
@@ -51,9 +52,9 @@ export default function PricingPage() {
               <li className="flex items-center text-gray-300 font-sans text-sm"><span className="text-white mr-3">✓</span> 24/7 Priority Support & SLAs</li>
             </ul>
             
-            <button className="w-full py-3 bg-white text-black hover:bg-gray-200 border border-transparent rounded transition-colors font-sans font-medium">
+            <Link href="/contact" className="block w-full py-3 bg-white text-black hover:bg-gray-200 border border-transparent rounded transition-colors font-sans font-medium text-center">
               Contact Support
-            </button>
+            </Link>
           </div>
         </div>
       </div>

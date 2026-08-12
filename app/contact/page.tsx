@@ -30,7 +30,7 @@ export default function ContactPage() {
               <p className="mb-6">
                 Looking for custom VPC deployments, dedicated AWS CodeBuild instances, or SLAs?
               </p>
-              <a href="mailto:sales@lonch.cloud" className="text-white hover:underline font-bold">support@lonch.cloud</a>
+              <a href="mailto:sales@lonch.cloud" className="text-white hover:underline font-bold">sales@lonch.cloud</a>
             </div>
           </div>
         </div>
