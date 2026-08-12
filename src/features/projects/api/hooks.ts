@@ -65,6 +65,16 @@ export function useProject(slug: string) {
     enabled: !!slug,
     staleTime: 0,
     gcTime: 0,
+    refetchInterval: (query) => {
+      const project = query.state.data;
+      if (!project) return false;
+      const latestDeployment = project.deployments?.[0];
+      const isDeploying = latestDeployment?.status === "QUEUED" || 
+                          latestDeployment?.status === "BUILDING" || 
+                          latestDeployment?.status === "PUSHING" || 
+                          latestDeployment?.status === "DEPLOYING";
+      return isDeploying ? 3000 : false;
+    },
   });
 }
 

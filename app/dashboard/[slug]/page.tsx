@@ -276,7 +276,7 @@ export default function ProjectDetailPage({ params }: { params: Promise<{ slug: 
               )}
               <div className="flex justify-between items-center text-sm border-b border-white/5 pb-3">
                 <span className="text-gray-500">Memory / CPU</span>
-                <span className="text-gray-200">{project.maxMemory ? project.maxMemory / (1024 * 1024) + "MB" : "Default"} / {project.maxCpu || 1} vCPU</span>
+                <span className="text-gray-200">{project.maxMemory ? project.maxMemory / (1024 * 1024) + "MB" : "4096MB"} / {project.maxCpu || 2} vCPU</span>
               </div>
               <div className="flex justify-between items-center text-sm">
                 <span className="text-gray-500">Created</span>
