@@ -1,5 +1,6 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { apiClient } from "@/lib/client";
+import { toast } from "sonner";
 
 export interface Project {
   id: string;
@@ -64,6 +65,15 @@ export function useProject(slug: string) {
     enabled: !!slug,
     staleTime: 0,
     gcTime: 0,
+    refetchInterval: (query) => {
+      const project = query.state.data;
+      const latestDeployment = project?.deployments?.[0];
+      const isDeploying = latestDeployment?.status === "QUEUED" || 
+                          latestDeployment?.status === "BUILDING" || 
+                          latestDeployment?.status === "PUSHING" || 
+                          latestDeployment?.status === "DEPLOYING";
+      return isDeploying ? 3000 : false;
+    },
   });
 }
 
@@ -89,7 +99,11 @@ export function useDeployProject() {
     },
     onSuccess: (_, projectId) => {
       queryClient.invalidateQueries({ queryKey: ["projects"] });
+      toast.success("Deployment triggered successfully!");
     },
+    onError: (err: any) => {
+      toast.error(err.response?.data?.message || "Failed to trigger deployment");
+    }
   });
 }
 
