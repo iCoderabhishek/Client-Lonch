@@ -27,6 +27,7 @@ export default function ImportProjectPage() {
   const [buildCmd, setBuildCmd] = useState("npm run build");
   const [startCmd, setStartCmd] = useState("npm start");
   const [outDir, setOutDir] = useState("dist");
+  const [envVars, setEnvVars] = useState([{ key: "", value: "" }]);
 
   // Fetch branches when a repo is selected
   const { data: branches, isLoading: loadingBranches } = useBranches(
@@ -73,6 +74,7 @@ export default function ImportProjectPage() {
       outputDirectory: type === "STATIC" ? outDir : undefined,
       rootDirectory: "/",
       baseImage: "node:22-alpine",
+      envVars: envVars.filter((e) => e.key.trim() !== ""),
     };
 
     const loadingToast = toast.loading("Importing repository...");
@@ -275,6 +277,55 @@ export default function ImportProjectPage() {
                           />
                         </div>
                       )}
+                    </div>
+                  </div>
+
+                  <div className="pt-4 border-t border-white/10">
+                    <h3 className="text-sm font-semibold text-white mb-4">Environment Variables</h3>
+                    <div className="space-y-3">
+                      {envVars.map((env, i) => (
+                        <div key={i} className="flex gap-2">
+                          <input
+                            type="text"
+                            placeholder="Key"
+                            value={env.key}
+                            onChange={(e) => {
+                              const newEnvs = [...envVars];
+                              newEnvs[i].key = e.target.value;
+                              setEnvVars(newEnvs);
+                            }}
+                            className="flex-1 bg-black border border-white/10 rounded-md px-3 py-1.5 text-sm font-mono text-gray-300 focus:outline-none focus:border-cyan-500"
+                          />
+                          <input
+                            type="text"
+                            placeholder="Value"
+                            value={env.value}
+                            onChange={(e) => {
+                              const newEnvs = [...envVars];
+                              newEnvs[i].value = e.target.value;
+                              setEnvVars(newEnvs);
+                            }}
+                            className="flex-1 bg-black border border-white/10 rounded-md px-3 py-1.5 text-sm font-mono text-gray-300 focus:outline-none focus:border-cyan-500"
+                          />
+                          <button
+                            type="button"
+                            onClick={() => {
+                              const newEnvs = envVars.filter((_, idx) => idx !== i);
+                              setEnvVars(newEnvs);
+                            }}
+                            className="px-3 text-gray-500 hover:text-red-400 bg-white/5 hover:bg-white/10 rounded-md"
+                          >
+                            ×
+                          </button>
+                        </div>
+                      ))}
+                      <button
+                        type="button"
+                        onClick={() => setEnvVars([...envVars, { key: "", value: "" }])}
+                        className="text-xs text-cyan-400 hover:text-cyan-300 font-medium"
+                      >
+                        + Add Environment Variable
+                      </button>
                     </div>
                   </div>
                   

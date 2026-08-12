@@ -1,7 +1,7 @@
 "use client";
 
 import React, { use } from "react";
-import { useProject, useDeployProject, useRollbackProject, useRollbackEligibility } from "@/features/projects/api/hooks";
+import { useProject, useDeployProject, useRollbackProject, useRollbackEligibility, useBranches, useUpdateProject } from "@/features/projects/api/hooks";
 import { BuildLogs } from "@/features/projects/components/BuildLogs";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
@@ -11,7 +11,7 @@ import { CommitCard } from "@/features/projects/components/CommitCard";
 import { useCommits } from "@/features/projects/api/hooks";
 import Link from "next/link";
 import { toast } from "sonner";
-import { Copy, Info, RefreshCw } from "lucide-react";
+import { Copy, Info, RefreshCw, GitBranch } from "lucide-react";
 
 export default function ProjectDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = use(params);
@@ -26,6 +26,8 @@ export default function ProjectDetailPage({ params }: { params: Promise<{ slug: 
   const [owner, repo] = (repoString || "").split("/");
 
   const { data: commits } = useCommits(owner, repo, project?.branch || "main");
+  const { data: branches, isLoading: loadingBranches } = useBranches(owner, repo);
+  const updateProject = useUpdateProject();
   const latestCommit = commits?.[0];
 
   if (isLoading) {
@@ -90,10 +92,48 @@ export default function ProjectDetailPage({ params }: { params: Promise<{ slug: 
               </Button>
             </div>
           )}
+
+          <div className="relative flex items-center">
+            {loadingBranches ? (
+               <div className="w-32 bg-black border border-white/10 rounded-md px-3 py-2 h-10 flex items-center justify-center">
+                 <div className="w-4 h-4 border-2 border-cyan-500/30 border-t-cyan-500 rounded-full animate-spin"></div>
+               </div>
+            ) : (
+              <>
+                <select
+                  className="w-40 bg-black border border-white/10 rounded-md pl-3 pr-8 py-2 text-sm text-white focus:outline-none focus:border-cyan-500 appearance-none h-10 transition-colors"
+                  value={project.branch || "main"}
+                  onChange={async (e) => {
+                    const newBranch = e.target.value;
+                    try {
+                      await updateProject.mutateAsync({
+                        slug: project.slug,
+                        data: { branch: newBranch, name: project.name, type: project.type, repoUrl: project.repoUrl }
+                      });
+                      toast.success(`Branch updated to ${newBranch}`);
+                    } catch (err) {
+                      toast.error("Failed to update branch");
+                    }
+                  }}
+                  disabled={updateProject.isPending || isDeploying}
+                >
+                  {branches?.map((b: any) => (
+                    <option key={b.name} value={b.name}>{b.name}</option>
+                  ))}
+                  {/* Fallback option if branches array is empty but we have a branch */}
+                  {!branches?.some((b: any) => b.name === (project.branch || "main")) && (
+                     <option value={project.branch || "main"}>{project.branch || "main"}</option>
+                  )}
+                </select>
+                <GitBranch className="w-4 h-4 text-gray-500 absolute right-3 pointer-events-none" />
+              </>
+            )}
+          </div>
+
           <Button
             onClick={() => deployMutation.mutate(project.id)}
             disabled={deployMutation.isPending || isDeploying}
-            className="bg-cyan-600 hover:bg-cyan-500 text-white shadow-[0_0_20px_rgba(34,211,238,0.3)] transition-all"
+            className="bg-cyan-600 hover:bg-cyan-500 text-white shadow-[0_0_20px_rgba(34,211,238,0.3)] transition-all h-10"
           >
             <Rocket02Icon className="w-4 h-4 mr-2" />
             {isDeploying ? "Deploying..." : "Trigger Deploy"}

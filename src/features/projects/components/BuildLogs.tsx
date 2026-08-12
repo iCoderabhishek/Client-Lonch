@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useEffect, useState, useRef } from "react";
-import { API_BASE_URL } from "@/lib/client";
 
 interface BuildLogsProps {
   deploymentId: string;
@@ -9,34 +8,57 @@ interface BuildLogsProps {
 
 export function BuildLogs({ deploymentId }: BuildLogsProps) {
   const [logs, setLogs] = useState<string[]>([]);
-  const [status, setStatus] = useState<"CONNECTING" | "STREAMING" | "CLOSED" | "ERROR">("CONNECTING");
+  const [status, setStatus] = useState<"CONNECTING" | "STREAMING" | "DONE" | "ERROR">("CONNECTING");
   const scrollRef = useRef<HTMLDivElement>(null);
+  const eventSourceRef = useRef<EventSource | null>(null);
 
   useEffect(() => {
     if (!deploymentId) return;
-    
-    // Need to include withCredentials for the auth cookie to be sent with EventSource
-    const eventSource = new EventSource(`${process.env.NEXT_PUBLIC_API_BASE_URL}/logs/deployments/${deploymentId}/build`, {
-      withCredentials: true,
-    });
+
+    setLogs([]);
+    setStatus("CONNECTING");
+
+    const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL?.replace(/\/$/, "") || "http://localhost:8080/api/v1";
+
+    // EventSource with withCredentials to send the session cookie
+    const eventSource = new EventSource(
+      `${apiBaseUrl}/logs/deployments/${deploymentId}/build`,
+      { withCredentials: true }
+    );
+    eventSourceRef.current = eventSource;
 
     eventSource.onopen = () => {
       setStatus("STREAMING");
     };
 
     eventSource.onmessage = (event) => {
-      setLogs((prev) => [...prev, event.data]);
+      const data = event.data;
+
+      // Backend sends this marker when logs are complete
+      if (data === "[BUILD_COMPLETE]") {
+        setStatus("DONE");
+        eventSource.close();
+        return;
+      }
+
+      setLogs((prev) => [...prev, data]);
     };
 
-    eventSource.onerror = (err) => {
-      console.error("EventSource failed:", err);
-      setStatus("ERROR");
+    eventSource.onerror = () => {
+      // If we already have logs, it's likely just the stream closing normally
+      setLogs((prev) => {
+        if (prev.length > 0) {
+          setStatus("DONE");
+        } else {
+          setStatus("ERROR");
+        }
+        return prev;
+      });
       eventSource.close();
     };
 
     return () => {
       eventSource.close();
-      setStatus("CLOSED");
     };
   }, [deploymentId]);
 
@@ -45,6 +67,15 @@ export function BuildLogs({ deploymentId }: BuildLogsProps) {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
     }
   }, [logs]);
+
+  const statusLabel = status === "DONE" ? "COMPLETE" : status;
+  const statusColor = status === "STREAMING"
+    ? "bg-green-500 animate-pulse shadow-[0_0_10px_rgba(34,197,94,0.5)]"
+    : status === "ERROR"
+      ? "bg-red-500"
+      : status === "DONE"
+        ? "bg-cyan-500 shadow-[0_0_10px_rgba(34,211,238,0.5)]"
+        : "bg-gray-500 animate-pulse";
 
   return (
     <div className="bg-[#0c0c0c] border border-white/10 rounded-xl overflow-hidden flex flex-col h-[500px] shadow-[0_0_30px_rgba(0,0,0,0.5)]">
@@ -58,8 +89,8 @@ export function BuildLogs({ deploymentId }: BuildLogsProps) {
           <span className="ml-3 uppercase tracking-wider text-[10px]">Build Output</span>
         </div>
         <div className="flex items-center gap-2">
-          <span className={`w-2 h-2 rounded-full ${status === "STREAMING" ? "bg-green-500 animate-pulse shadow-[0_0_10px_rgba(34,197,94,0.5)]" : status === "ERROR" ? "bg-red-500" : "bg-gray-500"}`} />
-          {status}
+          <span className={`w-2 h-2 rounded-full ${statusColor}`} />
+          {statusLabel}
         </div>
       </div>
       
@@ -75,9 +106,14 @@ export function BuildLogs({ deploymentId }: BuildLogsProps) {
             {log}
           </div>
         ))}
-        {status === "ERROR" && (
+        {logs.length === 0 && status === "ERROR" && (
           <div className="text-gray-400 mt-4 border border-white/10 bg-white/5 p-3 rounded text-center italic">
-            Build logs are visible when the project is deploying.
+            No build logs available yet. Logs appear when a deployment starts.
+          </div>
+        )}
+        {status === "DONE" && logs.length > 0 && (
+          <div className="text-cyan-400/70 mt-4 text-center text-xs italic">
+            ── Build log complete ──
           </div>
         )}
       </div>

@@ -93,6 +93,19 @@ export function useDeployProject() {
   });
 }
 
+export function useDeleteProject() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (slug: string) => {
+      const response = await apiClient.delete(`/projects/${slug}`);
+      return response.data;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["projects"] });
+    },
+  });
+}
+
 export function useRollbackProject() {
   const queryClient = useQueryClient();
   return useMutation({
