@@ -12,7 +12,8 @@ export default function DashboardPage() {
   const { data: projects, isLoading } = useProjects();
   const [search, setSearch] = useState("");
 
-  const filteredProjects = projects?.filter(p => p.name.toLowerCase().includes(search.toLowerCase())) || [];
+  const activeProjects = projects?.filter(p => !p.disabled) || [];
+  const filteredProjects = activeProjects.filter(p => p.name.toLowerCase().includes(search.toLowerCase()));
 
   return (
     <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
