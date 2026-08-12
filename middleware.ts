@@ -20,7 +20,14 @@ export async function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
-  const rawBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL?.replace(/\/$/, "") || "http://localhost:8080";
+  let rawBaseUrl = process.env.BACKEND_API_URL || process.env.NEXT_PUBLIC_API_BASE_URL || "https://api.lonch.cloud";
+  rawBaseUrl = rawBaseUrl.replace(/\/$/, "");
+  
+  if (rawBaseUrl.startsWith('/')) {
+    // If it's a relative URL, try to use the request origin, or fallback to the backend directly
+    rawBaseUrl = `https://api.lonch.cloud`;
+  }
+
   const apiUrl = rawBaseUrl.endsWith("/api/v1") ? rawBaseUrl : `${rawBaseUrl}/api/v1`;
   
   try {
