@@ -1,4 +1,3 @@
-import React from "react";
 import { Header } from "@/features/landing-page/header";
 import { Hero } from "@/features/landing-page/hero";
 import { Features } from "@/features/landing-page/features";

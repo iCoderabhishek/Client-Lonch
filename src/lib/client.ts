@@ -1,6 +1,7 @@
 import axios from "axios";
 
-export const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:8080/api/v1";
+const rawBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL?.replace(/\/$/, "") || "http://localhost:8080";
+export const API_BASE_URL = rawBaseUrl.endsWith("/api/v1") ? rawBaseUrl : `${rawBaseUrl}/api/v1`;
 
 export const apiClient = axios.create({
   baseURL: API_BASE_URL,
@@ -15,7 +16,7 @@ apiClient.interceptors.response.use(
   async (error) => {
     // 401 unauthenticated interceptor
     if (axios.isAxiosError(error) && error.response?.status === 401) {
-      // If we are not already on the login page or an invite link, redirect
+      // If we are not already on the landing page or an invite link, redirect
       if (
         typeof window !== "undefined" &&
         window.location.pathname !== "/" &&
