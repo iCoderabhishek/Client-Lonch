@@ -1,8 +1,21 @@
 import React from 'react';
+import type { Metadata } from 'next';
 import { Header } from '@/features/landing-page/header';
 import { Footer } from '@/features/landing-page/footer';
 import { Terminal, CheckCircle2, RotateCcw } from 'lucide-react';
 import Link from 'next/link';
+
+export const metadata: Metadata = {
+  title: "Deployments – Zero-Downtime Rollouts & Instant Rollbacks",
+  description:
+    "Deploy with confidence on Lonch. Zero-downtime rollouts with AWS ALB health checks, instant one-click rollbacks, and full deployment history for every project.",
+  alternates: { canonical: "https://lonch.cloud/deployments" },
+  openGraph: {
+    title: "Deploy with Confidence | Lonch",
+    description: "Zero-downtime rollouts, instant rollbacks, and full deployment history.",
+    url: "https://lonch.cloud/deployments",
+  },
+};
 
 export default function DeploymentsPage() {
   return (

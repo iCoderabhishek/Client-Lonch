@@ -1,6 +1,19 @@
 import React from 'react';
+import type { Metadata } from 'next';
 import { Header } from '@/features/landing-page/header';
 import { Footer } from '@/features/landing-page/footer';
+
+export const metadata: Metadata = {
+  title: "About Lonch – Our Mission, Architecture & Team",
+  description:
+    "Lonch bridges the simplicity of PaaS with the raw power of AWS. Learn about our mission, our containerised build architecture, and the team behind the platform.",
+  alternates: { canonical: "https://lonch.cloud/about" },
+  openGraph: {
+    title: "About Lonch | Cloud Deployment Platform",
+    description: "Our mission: give every developer enterprise-grade AWS infrastructure without the ops overhead.",
+    url: "https://lonch.cloud/about",
+  },
+};
 
 export default function AboutPage() {
   return (

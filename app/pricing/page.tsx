@@ -1,7 +1,20 @@
 import React from 'react';
 import Link from 'next/link';
+import type { Metadata } from 'next';
 import { Header } from '@/features/landing-page/header';
 import { Footer } from '@/features/landing-page/footer';
+
+export const metadata: Metadata = {
+  title: "Pricing – Free Cloud Hosting & Enterprise Plans",
+  description:
+    "Deploy static sites for free and scale backends with enterprise AWS infrastructure. Compare Lonch's Hobby and Custom plans — no credit card required.",
+  alternates: { canonical: "https://lonch.cloud/pricing" },
+  openGraph: {
+    title: "Pricing – Free Cloud Hosting & Enterprise Plans | Lonch",
+    description: "Deploy for free. Scale infinitely on AWS. Compare Lonch plans.",
+    url: "https://lonch.cloud/pricing",
+  },
+};
 
 export default function PricingPage() {
   return (

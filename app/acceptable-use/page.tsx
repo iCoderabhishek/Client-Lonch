@@ -1,6 +1,19 @@
 import React from 'react';
+import type { Metadata } from 'next';
 import { Header } from '@/features/landing-page/header';
 import { Footer } from '@/features/landing-page/footer';
+
+export const metadata: Metadata = {
+  title: "Acceptable Use Policy – Prohibited Activities & Resource Limits",
+  description:
+    "Read Lonch's acceptable use policy. Understand prohibited activities like crypto mining and malware hosting, resource limits, and enforcement procedures on our cloud platform.",
+  alternates: { canonical: "https://lonch.cloud/acceptable-use" },
+  openGraph: {
+    title: "Acceptable Use Policy | Lonch",
+    description: "Guidelines for responsible use of the Lonch deployment platform.",
+    url: "https://lonch.cloud/acceptable-use",
+  },
+};
 
 export default function AcceptableUsePage() {
   return (

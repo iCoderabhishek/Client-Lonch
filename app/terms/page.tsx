@@ -1,6 +1,19 @@
 import React from "react";
+import type { Metadata } from "next";
 import { Header } from "@/features/landing-page/header";
 import { Footer } from "@/features/landing-page/footer";
+
+export const metadata: Metadata = {
+  title: "Terms and Conditions – Lonch Platform Usage Agreement",
+  description:
+    "Review the terms and conditions governing your use of the Lonch cloud deployment platform, including service descriptions, user responsibilities, and liability limitations.",
+  alternates: { canonical: "https://lonch.cloud/terms" },
+  openGraph: {
+    title: "Terms and Conditions | Lonch",
+    description: "Terms governing use of the Lonch deployment platform.",
+    url: "https://lonch.cloud/terms",
+  },
+};
 
 export default function TermsPage() {
   return (

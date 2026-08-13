@@ -1,7 +1,20 @@
 import React from 'react';
+import type { Metadata } from 'next';
 import { Header } from '@/features/landing-page/header';
 import { Footer } from '@/features/landing-page/footer';
 import Link from 'next/link';
+
+export const metadata: Metadata = {
+  title: "Documentation – Getting Started, Static & Backend Deployments",
+  description:
+    "Learn how to deploy static sites and Dockerized backends on Lonch. Covers getting started, environment variables, custom domains, and build configuration.",
+  alternates: { canonical: "https://lonch.cloud/docs" },
+  openGraph: {
+    title: "Documentation | Lonch",
+    description: "Everything you need to deploy and scale your applications on Lonch.",
+    url: "https://lonch.cloud/docs",
+  },
+};
 
 export default function DocsPage() {
   return (

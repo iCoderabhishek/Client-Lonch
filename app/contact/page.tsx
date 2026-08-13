@@ -1,6 +1,19 @@
 import React from 'react';
+import type { Metadata } from 'next';
 import { Header } from '@/features/landing-page/header';
 import { Footer } from '@/features/landing-page/footer';
+
+export const metadata: Metadata = {
+  title: "Contact Us – Technical Support & Enterprise Sales",
+  description:
+    "Get help with deployments, build errors, or custom domains. Reach our engineering team at support@lonch.cloud or discuss enterprise plans at sales@lonch.cloud.",
+  alternates: { canonical: "https://lonch.cloud/contact" },
+  openGraph: {
+    title: "Contact Lonch",
+    description: "Get in touch with our engineering and sales teams.",
+    url: "https://lonch.cloud/contact",
+  },
+};
 
 export default function ContactPage() {
   return (

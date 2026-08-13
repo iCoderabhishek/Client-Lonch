@@ -1,6 +1,19 @@
 import React from "react";
+import type { Metadata } from "next";
 import { Header } from "@/features/landing-page/header";
 import { Footer } from "@/features/landing-page/footer";
+
+export const metadata: Metadata = {
+  title: "Privacy Policy – How Lonch Handles Your Data",
+  description:
+    "Read Lonch's privacy policy. Learn what data we collect, how we use it, and how your application secrets and personal information are protected.",
+  alternates: { canonical: "https://lonch.cloud/privacy" },
+  openGraph: {
+    title: "Privacy Policy | Lonch",
+    description: "How Lonch collects, uses, and protects your data.",
+    url: "https://lonch.cloud/privacy",
+  },
+};
 
 export default function PrivacyPage() {
   return (

@@ -1,6 +1,19 @@
 import React from 'react';
+import type { Metadata } from 'next';
 import { Header } from '@/features/landing-page/header';
 import { Footer } from '@/features/landing-page/footer';
+
+export const metadata: Metadata = {
+  title: "Platform Security – Isolated Builds, Encrypted Secrets & SSL",
+  description:
+    "Learn how Lonch secures your code with isolated AWS CodeBuild containers, encrypted environment variables, automated SSL via Let's Encrypt, and network-level protection through AWS ALB.",
+  alternates: { canonical: "https://lonch.cloud/security" },
+  openGraph: {
+    title: "Platform Security | Lonch",
+    description: "Isolated container builds, encrypted secrets, and auto-SSL. Security built into every layer.",
+    url: "https://lonch.cloud/security",
+  },
+};
 
 export default function SecurityPage() {
   return (
