@@ -5,11 +5,11 @@ import Link from "next/link";
 import { Menu01Icon, Cancel01Icon } from "hugeicons-react";
 import { API_BASE_URL } from "@/lib/client";
 
-const LonchLogo = ({ className }: { className?: string }) => (
+export const LonchLogo = ({ className }: { className?: string }) => (
   <svg className={className} width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M16 2L26 14H6L16 2Z" fill="currentColor"/>
-    <path d="M6 20L16 26L26 20" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
-    <path d="M10 26L16 30L22 26" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
+    <path d="M16 2L26 14H6L16 2Z" fill="currentColor" />
+    <path d="M6 20L16 26L26 20" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+    <path d="M10 26L16 30L22 26" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
   </svg>
 );
 
@@ -40,7 +40,7 @@ export function Header() {
         </a>
 
         {/* Mobile Menu Button */}
-        <button 
+        <button
           className="md:hidden p-2 text-white z-50"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
         >

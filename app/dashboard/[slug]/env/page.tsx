@@ -65,6 +65,52 @@ export default function EnvVarsPage({ params }: { params: Promise<{ slug: string
     }
   };
 
+  const handleEnvPaste = (e: React.ClipboardEvent<HTMLInputElement>, index: number, isKeyField: boolean) => {
+    const text = e.clipboardData.getData("text");
+    
+    if (!text.includes("\n") && !isKeyField) return;
+    if (!text.includes("\n") && !text.includes("=")) return;
+
+    const lines = text.split("\n");
+    const parsed: { key: string; value: string; id?: string }[] = [];
+    
+    lines.forEach((line) => {
+      line = line.trim();
+      if (!line || line.startsWith("#") || line.startsWith("//")) return;
+      
+      const delimiterIndex = line.indexOf("=");
+      if (delimiterIndex > -1) {
+        let key = line.substring(0, delimiterIndex).trim();
+        let value = line.substring(delimiterIndex + 1).trim();
+        
+        if ((value.startsWith('"') && value.endsWith('"')) || (value.startsWith("'") && value.endsWith("'"))) {
+          value = value.substring(1, value.length - 1);
+        }
+        
+        if (key) {
+          parsed.push({ key, value });
+        }
+      }
+    });
+
+    if (parsed.length > 0) {
+      e.preventDefault();
+      
+      const newEnvVars = [...envVars];
+      const current = newEnvVars[index];
+      
+      if (!current.key && (!current.value || current.value === "••••••••" || current.value === "")) {
+        newEnvVars.splice(index, 1, ...parsed);
+      } else {
+        newEnvVars.splice(index + 1, 0, ...parsed);
+      }
+      
+      setEnvVars(newEnvVars);
+      setIsEditing(true);
+      toast.success(`Parsed ${parsed.length} environment variables from paste.`);
+    }
+  };
+
   const handleUpdate = (index: number, field: "key" | "value", val: string) => {
     const newVars = [...envVars];
     newVars[index][field] = val;
@@ -153,9 +199,12 @@ export default function EnvVarsPage({ params }: { params: Promise<{ slug: string
       <div className="space-y-6">
         <div className="bg-zinc-950 border border-white/10 rounded-xl overflow-hidden shadow-xl shadow-black/50">
           <div className="p-4 border-b border-white/10 bg-black/50 flex justify-between items-center">
-            <h3 className="text-sm font-semibold text-white flex items-center gap-2">
-              <Variable className="w-4 h-4 text-cyan-400" /> Key Value Pairs
-            </h3>
+            <div>
+              <h3 className="text-sm font-semibold text-white flex items-center gap-2">
+                <Variable className="w-4 h-4 text-cyan-400" /> Key Value Pairs
+              </h3>
+              <p className="text-xs text-gray-500 mt-1 ml-6">Add variables one by one or paste your entire .env contents into any input.</p>
+            </div>
             <Button variant="ghost" size="sm" onClick={handleAddEmpty} className="h-8 text-xs bg-white/5 hover:bg-white/10">
               Add Row
             </Button>
@@ -184,6 +233,7 @@ export default function EnvVarsPage({ params }: { params: Promise<{ slug: string
                       placeholder="KEY (e.g. DATABASE_URL)"
                       value={env.key}
                       onChange={(e) => handleUpdate(i, "key", e.target.value)}
+                      onPaste={(e) => handleEnvPaste(e, i, true)}
                       className="w-full bg-black border border-white/10 rounded-md px-3 py-2 text-sm font-mono text-cyan-300 focus:outline-none focus:border-cyan-500 transition-colors"
                     />
                   </div>
@@ -199,6 +249,7 @@ export default function EnvVarsPage({ params }: { params: Promise<{ slug: string
                           handleUpdate(i, "value", "");
                         }
                       }}
+                      onPaste={(e) => handleEnvPaste(e, i, false)}
                       className="w-full bg-black border border-white/10 rounded-md px-3 py-2 text-sm font-mono text-gray-300 focus:outline-none focus:border-cyan-500 transition-colors"
                     />
                   </div>

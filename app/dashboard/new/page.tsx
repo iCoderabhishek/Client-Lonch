@@ -59,6 +59,50 @@ export default function ImportProjectPage() {
     r.fullName.toLowerCase().includes(searchQuery.toLowerCase())
   ) || [];
 
+  const handleEnvPaste = (e: React.ClipboardEvent<HTMLInputElement>, index: number, isKeyField: boolean) => {
+    const text = e.clipboardData.getData("text");
+    
+    if (!text.includes("\n") && !isKeyField) return;
+    if (!text.includes("\n") && !text.includes("=")) return;
+
+    const lines = text.split("\n");
+    const parsed: { key: string; value: string }[] = [];
+    
+    lines.forEach((line) => {
+      line = line.trim();
+      if (!line || line.startsWith("#") || line.startsWith("//")) return;
+      
+      const delimiterIndex = line.indexOf("=");
+      if (delimiterIndex > -1) {
+        let key = line.substring(0, delimiterIndex).trim();
+        let value = line.substring(delimiterIndex + 1).trim();
+        
+        if ((value.startsWith('"') && value.endsWith('"')) || (value.startsWith("'") && value.endsWith("'"))) {
+          value = value.substring(1, value.length - 1);
+        }
+        
+        if (key) {
+          parsed.push({ key, value });
+        }
+      }
+    });
+
+    if (parsed.length > 0) {
+      e.preventDefault();
+      
+      const newEnvVars = [...envVars];
+      const current = newEnvVars[index];
+      
+      if (!current.key && !current.value) {
+        newEnvVars.splice(index, 1, ...parsed);
+      } else {
+        newEnvVars.splice(index + 1, 0, ...parsed);
+      }
+      
+      setEnvVars(newEnvVars);
+    }
+  };
+
   const handleImport = async () => {
     if (!selectedRepo) return;
     
@@ -281,7 +325,10 @@ export default function ImportProjectPage() {
                   </div>
 
                   <div className="pt-4 border-t border-white/10">
-                    <h3 className="text-sm font-semibold text-white mb-4">Environment Variables</h3>
+                    <div className="mb-4">
+                      <h3 className="text-sm font-semibold text-white">Environment Variables</h3>
+                      <p className="text-xs text-gray-500 mt-1">Add variables one by one or paste your entire .env contents directly.</p>
+                    </div>
                     <div className="space-y-3">
                       {envVars.map((env, i) => (
                         <div key={i} className="flex gap-2">
@@ -294,6 +341,7 @@ export default function ImportProjectPage() {
                               newEnvs[i].key = e.target.value;
                               setEnvVars(newEnvs);
                             }}
+                            onPaste={(e) => handleEnvPaste(e, i, true)}
                             className="flex-1 bg-black border border-white/10 rounded-md px-3 py-1.5 text-sm font-mono text-gray-300 focus:outline-none focus:border-cyan-500"
                           />
                           <input
@@ -305,6 +353,7 @@ export default function ImportProjectPage() {
                               newEnvs[i].value = e.target.value;
                               setEnvVars(newEnvs);
                             }}
+                            onPaste={(e) => handleEnvPaste(e, i, false)}
                             className="flex-1 bg-black border border-white/10 rounded-md px-3 py-1.5 text-sm font-mono text-gray-300 focus:outline-none focus:border-cyan-500"
                           />
                           <button
