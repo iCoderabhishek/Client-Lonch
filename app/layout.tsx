@@ -48,8 +48,8 @@ export const metadata: Metadata = {
     "lonch",
     "lonch cloud",
   ],
-  authors: [{ name: "Abhishek", url: "https://www.0bhishek.com" }],
-  creator: "Abhishek",
+  authors: [{ name: "Abhishek Jha", url: "https://www.0bhishek.com" }],
+  creator: "Abhishek Jha",
   publisher: "Lonch",
   robots: {
     index: true,
@@ -96,26 +96,68 @@ export const metadata: Metadata = {
   },
 };
 
-const jsonLd = {
-  "@context": "https://schema.org",
-  "@type": "SoftwareApplication",
-  name: "Lonch",
-  url: "https://lonch.cloud",
-  applicationCategory: "DeveloperApplication",
-  operatingSystem: "Web",
-  description:
-    "Lonch is a next-generation cloud deployment platform. Import your GitHub repo and deploy static sites, backends, and APIs to AWS in seconds.",
-  offers: {
-    "@type": "Offer",
-    price: "0",
-    priceCurrency: "USD",
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "Lonch",
+    url: "https://lonch.cloud",
+    logo: "https://lonch.cloud/icon.svg",
+    description:
+      "Lonch is a cloud deployment platform that lets developers deploy static sites, backend APIs, and full-stack applications to production-grade AWS infrastructure in seconds.",
+    foundingDate: "2026",
+    founder: {
+      "@type": "Person",
+      name: "Abhishek Jha",
+      url: "https://www.0bhishek.com",
+      jobTitle: "Solo Founder & Developer",
+      sameAs: ["https://linkedin.com/in/0bhishek"],
+    },
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "Jalpaiguri",
+      addressRegion: "West Bengal",
+      addressCountry: "IN",
+    },
+    contactPoint: {
+      "@type": "ContactPoint",
+      email: "support@lonch.cloud",
+      contactType: "customer support",
+    },
+    sameAs: ["https://github.com/iCoderabhishek"],
   },
-  author: {
-    "@type": "Person",
-    name: "Abhishek",
-    url: "https://www.0bhishek.com",
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "Lonch",
+    url: "https://lonch.cloud",
+    description:
+      "Deploy apps to AWS in seconds. Lonch is a next-generation cloud deployment platform for developers.",
   },
-};
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    name: "Lonch",
+    url: "https://lonch.cloud",
+    applicationCategory: "DeveloperApplication",
+    operatingSystem: "Web",
+    description:
+      "Import your GitHub repo and deploy static sites, backends, and APIs to AWS in seconds — with auto-SSL, custom domains, live build logs, and zero-downtime rollouts.",
+    featureList:
+      "GitHub integration, Isolated Docker builds, ECS Fargate deployment, S3 + CloudFront hosting, Auto-SSL via ACM, Custom domains, Live build logs, Zero-downtime rolling updates, Environment variables, Multi-language support",
+    offers: {
+      "@type": "Offer",
+      price: "0",
+      priceCurrency: "USD",
+      description: "Free tier with unlimited static deployments and up to 3 backend applications",
+    },
+    author: {
+      "@type": "Person",
+      name: "Abhishek Jha",
+      url: "https://www.0bhishek.com",
+    },
+  },
+];
 
 export default function RootLayout({
   children,
