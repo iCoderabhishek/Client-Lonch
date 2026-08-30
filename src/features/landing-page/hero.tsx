@@ -21,6 +21,30 @@ export function Hero() {
         <div className="flex flex-col items-start pt-10 relative z-40">
 
           <div className="pl-6 border-l-2 border-white/20 mb-10 py-4 relative z-10">
+            {/* Google Cloud Badge */}
+            <div className="relative inline-block mb-6 group/badge">
+              {/* Moving blurry color glows */}
+              <div className="absolute -inset-1 bg-gradient-to-r from-[#4285F4] via-[#EA4335] to-[#FBBC05] rounded-full blur opacity-40 group-hover/badge:opacity-70 transition duration-1000 animate-pulse"></div>
+              <div className="absolute -inset-1 bg-gradient-to-r from-[#FBBC05] via-[#34A853] to-[#4285F4] rounded-full blur opacity-40 group-hover/badge:opacity-70 transition duration-1000 animate-pulse delay-500" style={{ animationDuration: '3s' }}></div>
+              
+              <a 
+                href="https://cloud.google.com/startup" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="relative flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/40 border border-white/10 backdrop-blur-xl hover:border-white/20 transition-all"
+              >
+                <div className="flex gap-[2px]">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#4285F4]"></span>
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#EA4335]"></span>
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#FBBC05]"></span>
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#34A853]"></span>
+                </div>
+                <span className="text-[10px] md:text-xs font-sans text-gray-300 tracking-wider uppercase group-hover/badge:text-white transition-colors">
+                  Powered by <strong className="text-white font-semibold">Google Cloud</strong> for Startups
+                </span>
+              </a>
+            </div>
+
             <p className="text-gray-400 font-sans text-lg mb-2">Welcome to</p>
             <h1 className="text-5xl sm:text-7xl lg:text-[5.5rem] font-heading font-bold text-cyan-500 tracking-widest leading-[1.1] mb-6 uppercase">
               LONCH<br />CLOUD

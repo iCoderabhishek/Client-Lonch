@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 const LonchLogo = ({ className }: { className?: string }) => (
   <svg className={className} width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -21,9 +22,35 @@ export function Footer() {
               <LonchLogo className="w-8 h-8 text-cyan-500 group-hover:text-cyan-400 transition-colors" />
               <span className="font-heading font-bold text-xl tracking-wider text-white">LONCH</span>
             </Link>
-            <p className="text-gray-500 font-sans text-sm leading-relaxed max-w-xs">
+            <p className="text-gray-500 font-sans text-sm leading-relaxed max-w-xs mb-6">
               Empowering developers to harness the full potential of their data with cutting-edge computing solutions.
             </p>
+            {/* Google Cloud Badge */}
+            <div className="flex flex-col gap-4">
+              <a 
+                href="https://cloud.google.com/startup" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-3 px-4 py-2.5 rounded-xl bg-white/[0.02] border border-white/5 hover:border-white/10 hover:bg-white/[0.04] transition-all w-fit group"
+              >
+                <div className="flex flex-col gap-[2px]">
+                  <div className="flex gap-[2px]">
+                    <span className="w-1.5 h-1.5 rounded-sm bg-[#4285F4]"></span>
+                    <span className="w-1.5 h-1.5 rounded-sm bg-[#EA4335]"></span>
+                  </div>
+                  <div className="flex gap-[2px]">
+                    <span className="w-1.5 h-1.5 rounded-sm bg-[#FBBC05]"></span>
+                    <span className="w-1.5 h-1.5 rounded-sm bg-[#34A853]"></span>
+                  </div>
+                </div>
+                <span className="text-xs font-sans text-gray-400 tracking-wide group-hover:text-gray-300 transition-colors">
+                  Powered by <strong className="text-white font-medium">Google Cloud</strong><br/>
+                  <span className="text-[10px] text-gray-500 uppercase tracking-widest group-hover:text-gray-400 transition-colors">for Startups</span>
+                </span>
+              </a>
+
+
+            </div>
           </div>
 
           {/* Product */}

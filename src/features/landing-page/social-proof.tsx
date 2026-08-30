@@ -141,9 +141,9 @@ export function SocialProof() {
         {/* AWS Badge */}
         <div className="flex justify-center mt-16">
           <div className="flex items-center gap-3 bg-white/[0.03] border border-white/10 rounded-full px-6 py-3">
-            <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+            <div className="w-2 h-2 rounded-full bg-cyan-500 animate-pulse" />
             <span className="text-gray-400 font-sans text-sm">
-              Powered by <span className="text-white font-medium">Amazon Web Services</span> — ECS Fargate · S3 · CloudFront · ECR · ACM
+              Deploying directly to <span className="text-white font-medium">Amazon Web Services</span> — ECS Fargate · S3 · CloudFront · ECR · ACM
             </span>
           </div>
         </div>

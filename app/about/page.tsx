@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import type { Metadata } from 'next';
 import { Header } from '@/features/landing-page/header';
 import { Footer } from '@/features/landing-page/footer';
@@ -56,11 +57,11 @@ export default function AboutPage() {
         <h1 className="text-4xl md:text-5xl font-heading font-bold text-white tracking-widest mb-10 uppercase">
           About Lonch
         </h1>
-        
+
         <div className="prose prose-invert prose-p:font-sans prose-p:text-gray-400 prose-h2:font-heading prose-h2:text-white prose-h2:tracking-wide max-w-none">
           <p className="text-xl mb-12">
-            Lonch is a next-generation cloud deployment platform that lets developers deploy any application — static sites, 
-            backend APIs, or full-stack apps — to production-grade AWS infrastructure in seconds. No Kubernetes. No Terraform. 
+            Lonch is a next-generation cloud deployment platform that lets developers deploy any application — static sites,
+            backend APIs, or full-stack apps — to production-grade AWS infrastructure in seconds. No Kubernetes. No Terraform.
             No DevOps required.
           </p>
 
@@ -68,18 +69,30 @@ export default function AboutPage() {
           <h2 className="text-2xl mt-12 mb-4">Founder</h2>
           <div className="not-prose mb-8">
             <div className="flex flex-col sm:flex-row items-start gap-6 bg-white/[0.03] border border-white/10 rounded-2xl p-6 md:p-8">
-              <div className="flex-shrink-0 w-16 h-16 rounded-xl bg-gradient-to-br from-cyan-500 to-cyan-700 flex items-center justify-center text-white font-heading font-bold text-2xl">
-                AJ
+              <div className="flex-shrink-0 w-20 h-20 sm:w-24 sm:h-24 rounded-2xl overflow-hidden border border-white/10 relative bg-black shadow-[0_0_30px_rgba(34,211,238,0.1)]">
+                <Image
+                  src="/avatar.png"
+                  alt="Abhishek Jha - Founder of Lonch"
+                  fill
+                  sizes="(max-width: 640px) 80px, 96px"
+                  className="object-cover"
+                />
               </div>
               <div>
                 <h3 className="text-white font-heading tracking-wider text-lg mb-1">Abhishek Jha</h3>
                 <p className="text-cyan-500 font-sans text-sm mb-3">Solo Founder &amp; Developer</p>
                 <p className="text-gray-400 font-sans text-sm leading-relaxed mb-4">
-                  Full-stack engineer and distributed systems enthusiast. Built Lonch because deploying 
-                  a containerized backend to AWS shouldn&apos;t require writing 500 lines of CloudFormation 
+                  Full-stack engineer and distributed systems enthusiast. Built Lonch because deploying
+                  a containerized backend to AWS shouldn&apos;t require writing 500 lines of CloudFormation
                   YAML. Previously worked on cloud infrastructure and developer tooling projects.
                 </p>
-                <div className="flex items-center gap-4">
+                <div className="flex flex-wrap items-center gap-4">
+                  <a
+                    href="mailto:connect@0bhishek.com"
+                    className="text-sm font-sans text-gray-500 hover:text-white transition-colors"
+                  >
+                    connect@0bhishek.com ↗
+                  </a>
                   <a
                     href="https://www.0bhishek.com"
                     target="_blank"
@@ -129,36 +142,36 @@ export default function AboutPage() {
               <div className="bg-white/[0.03] border border-white/10 rounded-xl p-6">
                 <h4 className="text-white font-heading tracking-wider text-sm mb-3">PaaS Solutions (Vercel, Netlify, Heroku)</h4>
                 <p className="text-gray-400 font-sans text-sm leading-relaxed">
-                  Simple to use, but expensive at scale. Vendor lock-in. Limited control over 
-                  infrastructure. Heroku killed its free tier. Vercel charges premium prices for 
+                  Simple to use, but expensive at scale. Vendor lock-in. Limited control over
+                  infrastructure. Heroku killed its free tier. Vercel charges premium prices for
                   serverless functions.
                 </p>
               </div>
               <div className="bg-white/[0.03] border border-white/10 rounded-xl p-6">
                 <h4 className="text-white font-heading tracking-wider text-sm mb-3">Raw AWS / Self-Hosting</h4>
                 <p className="text-gray-400 font-sans text-sm leading-relaxed">
-                  Powerful and cost-effective, but requires deep DevOps expertise. ECS task definitions, 
-                  CloudFormation stacks, IAM roles, VPC networking — a single backend deployment can 
+                  Powerful and cost-effective, but requires deep DevOps expertise. ECS task definitions,
+                  CloudFormation stacks, IAM roles, VPC networking — a single backend deployment can
                   take days to set up correctly.
                 </p>
               </div>
             </div>
           </div>
           <p className="mb-6">
-            <strong className="text-white">Lonch bridges this gap.</strong> We give you the simplicity of a PaaS 
-            with the raw power, scalability, and cost-efficiency of AWS. Import your GitHub repo, click deploy, 
+            <strong className="text-white">Lonch bridges this gap.</strong> We give you the simplicity of a PaaS
+            with the raw power, scalability, and cost-efficiency of AWS. Import your GitHub repo, click deploy,
             and your app runs on the same enterprise-grade infrastructure used by Fortune 500 companies.
           </p>
 
           {/* ─── Architecture ─── */}
           <h2 className="text-2xl mt-12 mb-4">Technical Architecture</h2>
           <p className="mb-6">
-            Lonch is architecturally split into two planes: a <strong className="text-white">Control Plane</strong> (the 
-            Lonch API, built with Bun and Node.js) that handles auth, project management, and orchestration, and 
-            a <strong className="text-white">Data/Execution Plane</strong> (AWS infrastructure) where customer code 
+            Lonch is architecturally split into two planes: a <strong className="text-white">Control Plane</strong> (the
+            Lonch API, built with Bun and Node.js) that handles auth, project management, and orchestration, and
+            a <strong className="text-white">Data/Execution Plane</strong> (AWS infrastructure) where customer code
             actually builds and runs.
           </p>
-          
+
           <div className="not-prose mb-8">
             <div className="flex flex-col gap-3">
               {architectureLayers.map((layer, index) => (
