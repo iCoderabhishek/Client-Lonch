@@ -80,7 +80,7 @@ export default function AboutPage() {
               </div>
               <div>
                 <h3 className="text-white font-heading tracking-wider text-lg mb-1">Abhishek Jha</h3>
-                <p className="text-cyan-500 font-sans text-sm mb-3">Solo Founder &amp; Developer</p>
+                <p className="text-cyan-500 font-sans text-sm mb-3">Founder</p>
                 <p className="text-gray-400 font-sans text-sm leading-relaxed mb-4">
                   Full-stack engineer and distributed systems enthusiast. Built Lonch because deploying
                   a containerized backend to AWS shouldn&apos;t require writing 500 lines of CloudFormation
@@ -88,10 +88,10 @@ export default function AboutPage() {
                 </p>
                 <div className="flex flex-wrap items-center gap-4">
                   <a
-                    href="mailto:connect@0bhishek.com"
+                    href="mailto:founder@lonch.cloud"
                     className="text-sm font-sans text-gray-500 hover:text-white transition-colors"
                   >
-                    connect@0bhishek.com ↗
+                    founder@lonch.cloud ↗
                   </a>
                   <a
                     href="https://www.0bhishek.com"

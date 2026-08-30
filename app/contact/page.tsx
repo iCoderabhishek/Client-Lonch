@@ -46,6 +46,19 @@ export default function ContactPage() {
               <a href="mailto:sales@lonch.cloud" className="text-white hover:underline font-bold">sales@lonch.cloud</a>
             </div>
           </div>
+          
+          <div className="bg-white/5 border border-white/10 p-8 rounded-xl max-w-2xl">
+            <h2 className="text-2xl mt-0 mb-4">Office Address</h2>
+            <p className="mb-2 text-white font-medium">
+              Lonch
+            </p>
+            <p className="text-gray-400">
+              Near Post Office, Rajganj<br />
+              Jalpaiguri, West Bengal<br />
+              PIN: 735134<br />
+              India
+            </p>
+          </div>
         </div>
       </div>
       <Footer />

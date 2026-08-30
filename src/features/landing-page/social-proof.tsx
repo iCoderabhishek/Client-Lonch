@@ -5,24 +5,24 @@ import { motion } from "framer-motion";
 
 const stats = [
   {
+    value: "100+",
+    label: "Deployments",
+    description: "Successful zero-downtime rollouts",
+  },
+  {
+    value: "20+",
+    label: "Active Developers",
+    description: "Building production apps in Beta",
+  },
+  {
     value: "< 60s",
     label: "Average Deploy Time",
     description: "From git push to live production URL",
   },
   {
-    value: "6+",
-    label: "Languages Supported",
-    description: "Node.js, Python, Go, Rust, Java & more",
-  },
-  {
-    value: "100%",
-    label: "AWS Native",
-    description: "Built on ECS, Fargate, S3, CloudFront, ECR",
-  },
-  {
-    value: "0",
-    label: "DevOps Required",
-    description: "No Kubernetes, no CloudFormation, no Terraform",
+    value: "99.9%",
+    label: "Uptime SLA",
+    description: "Guaranteed by native AWS infrastructure",
   },
 ];
 
@@ -79,7 +79,7 @@ export function SocialProof() {
           </h2>
         </div>
         <p className="text-gray-400 font-sans text-lg max-w-2xl mx-auto text-center mb-20">
-          Lonch is purpose-built to give developers the power of AWS without the complexity. 
+          Lonch is purpose-built to give developers the power of AWS without the complexity.
           Every deployment runs on battle-tested infrastructure.
         </p>
 

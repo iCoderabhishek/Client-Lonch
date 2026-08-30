@@ -30,7 +30,7 @@ export default function PricingPage() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
           {/* Free Tier */}
           <div className="bg-white/5 border border-white/10 rounded-2xl p-8 hover:border-white/30 transition-colors">
             <h3 className="text-2xl font-heading text-white mb-2">Hobby</h3>
@@ -46,6 +46,27 @@ export default function PricingPage() {
             
             <Link href="/dashboard" className="block w-full py-3 bg-white/10 hover:bg-white/20 border border-white/20 text-white rounded transition-colors font-sans text-center">
               Deploy Now
+            </Link>
+          </div>
+
+          {/* Pro Tier */}
+          <div className="bg-cyan-900/10 border border-cyan-500/30 rounded-2xl p-8 relative hover:border-cyan-500/50 transition-colors">
+            <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-cyan-500 text-black text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
+              Most Popular
+            </div>
+            <h3 className="text-2xl font-heading text-white mb-2">Pro</h3>
+            <div className="text-4xl font-bold font-heading text-white mb-6">$19<span className="text-lg text-gray-500 font-sans font-normal">/mo</span></div>
+            <p className="text-gray-400 font-sans mb-8">For professional developers and startups.</p>
+            
+            <ul className="space-y-4 mb-10">
+              <li className="flex items-center text-gray-300 font-sans text-sm"><span className="text-white mr-3">✓</span> Unlimited Static Deployments</li>
+              <li className="flex items-center text-gray-300 font-sans text-sm"><span className="text-white mr-3">✓</span> Up to 15 Backend Applications</li>
+              <li className="flex items-center text-gray-300 font-sans text-sm"><span className="text-white mr-3">✓</span> Priority Build Queue</li>
+              <li className="flex items-center text-gray-300 font-sans text-sm"><span className="text-white mr-3">✓</span> Email & Chat Support</li>
+            </ul>
+            
+            <Link href="/dashboard" className="block w-full py-3 bg-cyan-500 hover:bg-cyan-400 text-black rounded transition-colors font-sans font-medium text-center">
+              Start Free Trial
             </Link>
           </div>
 
