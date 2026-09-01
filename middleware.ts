@@ -35,6 +35,7 @@ export async function middleware(request: NextRequest) {
     const res = await fetch(`${apiUrl}/auth/me`, {
       headers: {
         cookie: cookieHeader,
+        Host: 'api.lonch.cloud',
       },
     });
 
