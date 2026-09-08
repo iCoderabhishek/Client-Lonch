@@ -234,12 +234,12 @@ export default function AboutPage() {
               <p className="text-gray-400 font-sans text-sm mb-6 max-w-lg mx-auto">
                 Import your GitHub repository and deploy to AWS in under 60 seconds. No credit card required.
               </p>
-              <Link
-                href={`${process.env.NEXT_PUBLIC_AUTH_URL}/github`}
+              <a
+                href="https://api.lonch.cloud/api/v1/auth/github"
                 className="inline-block px-10 py-3 bg-white text-black font-sans font-bold tracking-widest text-sm uppercase rounded-sm hover:bg-cyan-500 hover:text-white transition-all duration-300"
               >
                 Start Building
-              </Link>
+              </a>
             </div>
           </div>
         </div>
