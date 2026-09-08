@@ -1,12 +1,24 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import Link from "next/link";
 import { Globe } from "lucide-react";
+import { getDnsConfig } from "@/features/projects/api/dnsConfig";
 
 export default function DomainGuidePage() {
   const { slug } = useParams() as { slug: string };
+  const [dnsConfig, setDnsConfig] = useState<{proxyIp?: string, proxyDomain?: string, rootDomain?: string}>({});
+
+  useEffect(() => {
+    getDnsConfig().then((data) => {
+      setDnsConfig({
+        proxyIp: data.proxyIp,
+        proxyDomain: data.proxyDomain,
+        rootDomain: data.rootDomain
+      });
+    });
+  }, []);
 
   return (
     <div className="space-y-8 max-w-3xl mx-auto animate-in fade-in duration-500">
@@ -21,8 +33,8 @@ export default function DomainGuidePage() {
         <li>
           <strong>Open your DNS provider</strong> (Cloudflare, Route53, GoDaddy, etc.) and create the records shown on the <Link href={`/dashboard/${slug}/domains`} className="underline text-cyan-400 hover:text-cyan-300">Custom Domains page</Link>.
           <ul className="ml-6 list-disc">
-            <li>If your domain is a root (apex) domain, add an <code className="bg-black/50 px-1 py-0.5 rounded">A</code> record pointing to <code className="bg-black/50 px-1 py-0.5 rounded">{process.env.NEXT_PUBLIC_PROXY_IP}</code>.</li>
-            <li>If it’s a subdomain, add a <code className="bg-black/50 px-1 py-0.5 rounded">CNAME</code> record pointing to <code className="bg-black/50 px-1 py-0.5 rounded">{process.env.NEXT_PUBLIC_PROXY_DOMAIN}</code>.</li>
+            <li>If your domain is a root (apex) domain, add an <code className="bg-black/50 px-1 py-0.5 rounded">A</code> record pointing to <code className="bg-black/50 px-1 py-0.5 rounded">{dnsConfig.proxyIp || "..."}</code>.</li>
+            <li>If it’s a subdomain, add a <code className="bg-black/50 px-1 py-0.5 rounded">CNAME</code> record pointing to <code className="bg-black/50 px-1 py-0.5 rounded">{dnsConfig.proxyDomain || "..."}</code>.</li>
           </ul>
         </li>
         <li>
@@ -32,7 +44,7 @@ export default function DomainGuidePage() {
           <strong>SSL certificate</strong> will be requested from AWS ACM. When the status changes to <em>Issued</em>, your site will be served over HTTPS automatically.
         </li>
         <li>
-          <strong>Enjoy!</strong> Your project will now be reachable at <code className="bg-black/50 px-1 py-0.5 rounded">{slug}.{process.env.NEXT_PUBLIC_ROOT_DOMAIN}</code>.
+          <strong>Enjoy!</strong> Your project will now be reachable at <code className="bg-black/50 px-1 py-0.5 rounded">{slug}.{dnsConfig.rootDomain || "..."}</code>.
         </li>
       </ol>
 

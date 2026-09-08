@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { useAddCustomDomain, useVerifyCustomDomain, ProjectDetail } from "@/features/projects/api/hooks";
+import { getDnsConfig } from "@/features/projects/api/dnsConfig";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Globe, CheckCircle2, Loader2, AlertCircle, RefreshCw } from "lucide-react";
@@ -11,6 +12,16 @@ export function DomainSettings({ project }: { project: ProjectDetail }) {
   const [domainInput, setDomainInput] = useState("");
   const addDomain = useAddCustomDomain();
   const { data: verification, isLoading: isVerifying, refetch } = useVerifyCustomDomain(project.slug);
+  const [dnsConfig, setDnsConfig] = useState<{proxyIp?: string, proxyDomain?: string}>({});
+
+  React.useEffect(() => {
+    getDnsConfig().then((data) => {
+      setDnsConfig({
+        proxyIp: data.proxyIp,
+        proxyDomain: data.proxyDomain
+      });
+    });
+  }, []);
 
   const handleAddDomain = async () => {
     if (!domainInput) return;
@@ -104,13 +115,13 @@ export function DomainSettings({ project }: { project: ProjectDetail }) {
                           <tr className="border-b border-white/5">
                             <td className="px-4 py-3 font-mono">A</td>
                             <td className="px-4 py-3 font-mono">@</td>
-                            <td className="px-4 py-3 font-mono">{process.env.NEXT_PUBLIC_PROXY_IP}</td>
+                            <td className="px-4 py-3 font-mono">{dnsConfig.proxyIp || "Loading..."}</td>
                           </tr>
                         ) : (
                           <tr className="border-b border-white/5">
                             <td className="px-4 py-3 font-mono">CNAME</td>
                             <td className="px-4 py-3 font-mono">{project.customDomain!.split('.')[0]}</td>
-                            <td className="px-4 py-3 font-mono">{process.env.NEXT_PUBLIC_PROXY_DOMAIN}</td>
+                            <td className="px-4 py-3 font-mono">{dnsConfig.proxyDomain || "Loading..."}</td>
                           </tr>
                         )}
                         {verification.sslStatus === "PENDING_VALIDATION" && verification.validationRecord && (

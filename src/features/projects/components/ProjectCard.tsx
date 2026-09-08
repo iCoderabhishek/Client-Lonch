@@ -7,6 +7,7 @@ import { GithubIcon, TimeQuarterIcon, AlertCircleIcon, Tick02Icon, Loading02Icon
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ProjectDetail, useCommits } from "../api/hooks";
+import { getDnsConfig } from "../api/dnsConfig";
 import { GitCommit } from "lucide-react";
 
 interface ProjectCardProps {
@@ -27,6 +28,11 @@ export function ProjectCard({ project }: ProjectCardProps) {
   // Extract owner and repo for commit fetching
   const repoString = project.repoUrl.replace("https://github.com/", "").replace(".git", "");
   const [owner, repo] = repoString.split("/");
+
+  const [rootDomain, setRootDomain] = React.useState<string | undefined>();
+  React.useEffect(() => {
+    getDnsConfig().then((data) => setRootDomain(data.rootDomain));
+  }, []);
 
   const { data: commits } = useCommits(owner, repo, project.branch);
   const latestCommit = commits?.[0];
@@ -49,7 +55,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
             </Badge>
           </CardTitle>
           <div className="text-sm text-gray-400 font-mono mt-1">
-            {project.slug}.{process.env.NEXT_PUBLIC_ROOT_DOMAIN}
+            {project.slug}.{rootDomain || "..."}
           </div>
         </CardHeader>
         <CardContent className="px-6 pb-6">

@@ -12,6 +12,7 @@ import { useCommits } from "@/features/projects/api/hooks";
 import Link from "next/link";
 import { toast } from "sonner";
 import { Copy, Info, RefreshCw, GitBranch } from "lucide-react";
+import { getDnsConfig } from "@/features/projects/api/dnsConfig";
 
 export default function ProjectDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = use(params);
@@ -20,6 +21,11 @@ export default function ProjectDetailPage({ params }: { params: Promise<{ slug: 
 
   const deployMutation = useDeployProject();
   const rollbackMutation = useRollbackProject();
+
+  const [rootDomain, setRootDomain] = React.useState<string | undefined>();
+  React.useEffect(() => {
+    getDnsConfig().then((data) => setRootDomain(data.rootDomain));
+  }, []);
 
   // Extract owner and repo for commit fetching safely
   const repoString = project?.repoUrl?.replace("https://github.com/", "").replace(".git", "");
@@ -61,12 +67,12 @@ export default function ProjectDetailPage({ params }: { params: Promise<{ slug: 
         <div>
           <h1 className="text-3xl font-bold tracking-tight text-white mb-1">{project.name}</h1>
           <div className="flex items-center gap-2">
-            <a href={`https://${project.slug}.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`} target="_blank" rel="noreferrer" className="text-cyan-400 hover:text-cyan-300 transition-colors hover:underline text-sm font-medium">
-              {project.slug}.{process.env.NEXT_PUBLIC_ROOT_DOMAIN}
+            <a href={`https://${project.slug}.${rootDomain || "..."}`} target="_blank" rel="noreferrer" className="text-cyan-400 hover:text-cyan-300 transition-colors hover:underline text-sm font-medium">
+              {project.slug}.{rootDomain || "..."}
             </a>
             <button
               onClick={() => {
-                navigator.clipboard.writeText(`https://${project.slug}.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`);
+                navigator.clipboard.writeText(`https://${project.slug}.${rootDomain || ""}`);
                 toast.success("URL copied to clipboard!");
               }}
               className="p-1 text-gray-500 hover:text-white hover:bg-white/10 rounded transition-colors"

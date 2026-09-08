@@ -4,9 +4,22 @@ import type { NextRequest } from 'next/server';
 export async function middleware(request: NextRequest) {
   const isDashboardPage = request.nextUrl.pathname.startsWith('/dashboard');
   const isLandingPage = request.nextUrl.pathname === '/';
+  const isApiRoute = request.nextUrl.pathname.startsWith('/api/');
 
-  if (!isDashboardPage && !isLandingPage) {
+  if (!isDashboardPage && !isLandingPage && !isApiRoute) {
     return NextResponse.next();
+  }
+
+  if (isApiRoute) {
+    const requestHeaders = new Headers(request.headers);
+    if (process.env.APP_SECRET_KEY) {
+      requestHeaders.set('X-App-Key', process.env.APP_SECRET_KEY);
+    }
+    return NextResponse.next({
+      request: {
+        headers: requestHeaders,
+      },
+    });
   }
 
   // Fast check: if no cookies at all, they definitely aren't authenticated
@@ -59,5 +72,5 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/', '/dashboard/:path*'],
+  matcher: ['/', '/dashboard/:path*', '/api/:path*'],
 };

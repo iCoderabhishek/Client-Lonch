@@ -1,13 +1,19 @@
 "use client";
 
-import React, { use } from "react";
+import React, { use, useEffect, useState } from "react";
 import { useProject } from "@/features/projects/api/hooks";
 import { DomainSettings } from "@/features/projects/components/DomainSettings";
 import { Globe } from "lucide-react";
+import { getDnsConfig } from "@/features/projects/api/dnsConfig";
 
 export default function DomainsPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = use(params);
   const { data: project, isLoading } = useProject(slug);
+  const [dnsConfig, setDnsConfig] = useState<{rootDomain?: string}>({});
+
+  useEffect(() => {
+    getDnsConfig().then((data) => setDnsConfig({ rootDomain: data.rootDomain }));
+  }, []);
 
   if (isLoading) {
     return <div className="animate-pulse h-64 bg-white/5 rounded-xl border border-white/10" />;
@@ -22,7 +28,7 @@ export default function DomainsPage({ params }: { params: Promise<{ slug: string
           <Globe className="w-6 h-6 text-cyan-400" /> Custom Domains
         </h1>
         <p className="text-sm text-gray-400 max-w-2xl leading-relaxed">
-          Custom domains allow you to serve your project under your own branded URL (e.g., <strong>www.yourstartup.com</strong>) instead of the default `.{process.env.NEXT_PUBLIC_ROOT_DOMAIN}` subdomain.
+          Custom domains allow you to serve your project under your own branded URL (e.g., <strong>www.yourstartup.com</strong>) instead of the default `.{dnsConfig.rootDomain || "..."}` subdomain.
           <br /><br />
           <strong>How it works:</strong>
           <br />
