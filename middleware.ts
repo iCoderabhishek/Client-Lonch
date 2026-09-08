@@ -19,40 +19,10 @@ export async function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
-  let rawBaseUrl = process.env.BACKEND_API_URL || process.env.NEXT_PUBLIC_API_BASE_URL || "https://api.lonch.cloud";
-  rawBaseUrl = rawBaseUrl.replace(/\/$/, "");
-  
-  if (rawBaseUrl.startsWith('/')) {
-    // If it's a relative URL, try to use the request origin, or fallback to the backend directly
-    rawBaseUrl = `https://api.lonch.cloud`;
+  if (isLandingPage) {
+    return NextResponse.redirect(new URL('/dashboard', request.url));
   }
 
-  const apiUrl = rawBaseUrl.endsWith("/api/v1") ? rawBaseUrl : `${rawBaseUrl}/api/v1`;
-  
-  try {
-    // Verify auth state with backend
-    const res = await fetch(`${apiUrl}/auth/me`, {
-      headers: {
-        cookie: cookieHeader,
-        Host: 'api.lonch.cloud',
-      },
-    });
-
-    const isAuthenticated = res.ok;
-
-    if (isDashboardPage && !isAuthenticated) {
-      return NextResponse.redirect(new URL('/', request.url));
-    }
-
-    if (isLandingPage && isAuthenticated) {
-      return NextResponse.redirect(new URL('/dashboard', request.url));
-    }
-  } catch (err) {
-    // If backend check fails (e.g. network error), fallback to unauthenticated
-    if (isDashboardPage) {
-      return NextResponse.redirect(new URL('/', request.url));
-    }
-  }
 
   return NextResponse.next();
 }
