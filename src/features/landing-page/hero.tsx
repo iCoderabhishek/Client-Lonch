@@ -62,7 +62,7 @@ export function Hero() {
 
           <div className="mt-12 pl-6 mb-24 lg:mb-32 relative z-40">
             <a
-              href={`${API_BASE_URL}/auth/github`}
+              href={`${process.env.NEXT_PUBLIC_AUTH_URL}/github`}
               className="group relative inline-block px-12 py-4 bg-white text-black font-sans font-bold tracking-widest text-base uppercase transition-all duration-300 hover:scale-105 hover:shadow-[0_0_40px_rgba(34,211,238,0.6)] hover:text-white rounded-sm overflow-hidden"
             >
               <span className="relative z-10 transition-colors duration-300">Start Building</span>
